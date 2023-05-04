@@ -1,6 +1,7 @@
 package OrderManagement;
 
 import Authentication.Account;
+import Authentication.Authentication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +47,7 @@ public class OrderManagement { // m7tag el user ytzbt el awl
     } // logged in is global
 
     public boolean placeOrder() {
-        //loggedIn.getCart().viewCart();
+//        Account loggedInUser = Authentication.LoggedInUser;
         Scanner input = new Scanner(System.in);
         String option = "3";
         while (!option.equals("1") && !option.equals("2")) {
