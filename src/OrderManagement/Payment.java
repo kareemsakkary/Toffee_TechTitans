@@ -1,12 +1,12 @@
 package OrderManagement;
 
-import Authentication.User;
+import Authentication.Account;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Payment {
-    private User customer;
+    private Account customer;
     private Order order;
     private String PaymentMethod;//m3rfsh 7war el enumerations lsa
     private double netPrice;
@@ -85,7 +85,7 @@ public class Payment {
         return false;
     }
 
-    public void setCustomer(User customer) {
+    public void setCustomer(Account customer) {
         this.customer = customer;
     }
 

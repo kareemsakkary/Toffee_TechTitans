@@ -3,12 +3,12 @@ package OrderManagement;
 import java.util.HashMap;
 import java.util.Map;
 
-import Authentication.User;
+import Authentication.Account;
 
 public class ShoppingCart {
     private HashMap<String, Integer> cartItems = new HashMap<>();
     private double totalPrice;
-    private User customer;
+    private Account customer;
 
     public void calcTotal() {
         //loop 3la value el items wa update el total price

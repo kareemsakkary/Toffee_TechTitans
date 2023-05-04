@@ -1,4 +1,4 @@
 package Authentication;
 
-public class User {
+public class Admin {
 }

@@ -1,13 +1,13 @@
 package OrderManagement;
 
-import Authentication.User;
+import Authentication.Account;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class OrderManagement { // m7tag el user ytzbt el awl
-    private HashMap<User, ArrayList<Order>> orders = new HashMap<>();
+    private HashMap<Account, ArrayList<Order>> orders = new HashMap<>();
 
     public void viewAllOrders() {
     }
