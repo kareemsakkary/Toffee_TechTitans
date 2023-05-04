@@ -50,7 +50,6 @@ public class Account {
     public boolean getAdmin() {
         return isAdmin;
     }
-
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }

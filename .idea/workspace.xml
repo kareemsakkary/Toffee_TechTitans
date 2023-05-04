@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="add Authentication">
-      <change afterPath="$PROJECT_DIR$/src/Authentication/Authentication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/StockManagement/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Authentication/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +57,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683198244878</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add Authentication">
+      <created>1683206105368</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683206105368</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
