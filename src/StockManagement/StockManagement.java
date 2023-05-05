@@ -12,7 +12,7 @@ public class StockManagement {
         int cnt = 1;
         for (int i = 0; i < categories.size(); i++) {
             System.out.print(cnt + ".");
-            System.out.println(categories.get(i) + " ");
+            System.out.println(categories.get(i).getName() + " ");
             cnt++;
         }
     }
@@ -28,9 +28,16 @@ public class StockManagement {
         return categories;
     }
 
-    public void viewAllItems(){
-        for(Category c: categories){
-            c.viewItems();
+    public void viewCatalog(){
+        int cnt = 1;
+        for (int i = 0; i < categories.size(); i++){
+            for (int j = 0; j < categories.get(i).getItems().size(); j++){
+                System.out.println(cnt +".Name: " + categories.get(i).getItems().get(j).getName());
+                System.out.println("Category: " + categories.get(i).getItems().get(j).getCategory());
+                System.out.println("Price: " + categories.get(i).getItems().get(j).getPrice() + " EGP");
+                System.out.println();
+                cnt++;
+            }
         }
     }
     public void printStatistics(){
