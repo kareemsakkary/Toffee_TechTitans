@@ -6,7 +6,13 @@ public class Authentication {
     void setLoggedInUser(Account acc){
         LoggedInUser = acc;
     }
-    void login(){
-        Account LoggedInuser;
+    public void login(){
+        Account LoggedUser;
+    }
+    public void register(){
+
+    }
+    public void logout(){
+
     }
 }
