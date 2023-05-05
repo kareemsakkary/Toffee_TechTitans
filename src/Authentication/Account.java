@@ -1,25 +1,36 @@
 package Authentication;
 
 public class Account {
-    private int accountID ;
+    private String accountID ;
+
+    private String name;
     private String password ;
     private String phone ;
     private String email ;
     private boolean isAdmin;
 
-    public Account(int accountID, String password, String phone, String email, Boolean isAdmin) {
+    public Account(String accountID,String name, String password, String phone, String email, boolean isAdmin ) {
         this.accountID = accountID;
+        this.name = name;
         this.password = password;
         this.phone = phone;
         this.email = email;
         this.isAdmin = isAdmin;
     }
 
-    public int getAccountID() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(int accountID) {
+    public void setAccountID(String accountID) {
         this.accountID = accountID;
     }
 
@@ -47,7 +58,7 @@ public class Account {
         this.email = email;
     }
 
-    public boolean getAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
     public void setAdmin(boolean admin) {

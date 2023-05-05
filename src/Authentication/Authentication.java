@@ -1,5 +1,7 @@
 package Authentication;
 
+import Manager.DataManager;
+
 public class Authentication {
     public static Account LoggedInUser;
 
@@ -7,7 +9,9 @@ public class Authentication {
         LoggedInUser = acc;
     }
     public void login(){
-        Account LoggedUser;
+        DataManager dm = new  DataManager();
+        LoggedInUser = dm.getCustomer("22");
+        //        dm.print();
     }
     public void register(){
 

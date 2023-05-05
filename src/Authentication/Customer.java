@@ -6,11 +6,9 @@ public class Customer extends Account {
     private int loyaltyPoints;
     private boolean isSuspend;
     private String address;
-    public Customer(int accountID, String password, String phone, String email, Boolean isAdmin, ShoppingCart cart, int loyaltyPoints, boolean isSuspend, String address) {
-        super(accountID, password, phone, email, isAdmin);
+    public Customer(String accountID,String name, String password, String phone, String email, Boolean isAdmin, ShoppingCart cart, String address) {
+        super(accountID,name, password, phone, email, isAdmin);
         this.cart = cart;
-        this.loyaltyPoints = loyaltyPoints;
-        this.isSuspend = isSuspend;
         this.address = address;
     }
     public ShoppingCart getCart() {
