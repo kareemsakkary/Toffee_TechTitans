@@ -5,18 +5,15 @@ public class Item {
     private String id; // set manually or automatic?
     private String name;
     private int loyaltyPoints;
-    private String description;
     private String category;
-    private int timesOrdered;
+    private int timesOrdered = 0;
     private double price;
 
-    public Item(String id, String name, int loyaltyPoints, String description, String category, int timesOrdered, double price) {
+    public Item(String id, String name, int loyaltyPoints, String category, double price) {
         this.id = id;
         this.name = name;
         this.loyaltyPoints = loyaltyPoints;
-        this.description = description;
         this.category = category;
-        this.timesOrdered = timesOrdered;
         this.price = price;
     }
 
@@ -43,15 +40,6 @@ public class Item {
     public void setLoyaltyPoints(int loyaltyPoints) {
         this.loyaltyPoints = loyaltyPoints;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -76,14 +64,13 @@ public class Item {
         this.price = price;
     }
     public void updateItem(){
-        // ask which attr the admin wants to update
+
     }
     public void viewItem(){
         System.out.println("Name: " + this.getName());
-        System.out.println("Description: " + this.getDescription());
         System.out.println("Price: " + this.getPrice() + " EGP");
         System.out.println("Category: " + this.getCategory());
-        System.out.println("Loyalty Points: " + this.getLoyaltyPoints());
+        System.out.println("Loyalty Points: " + this.getLoyaltyPoints() + " points");
     }
 
     void printStatisticsOfItem(){
