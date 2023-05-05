@@ -1,0 +1,409 @@
+Index: src/DataManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class DataManager {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/DataManager.java b/src/DataManager.java
+--- a/src/DataManager.java	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/src/DataManager.java	(date 1683321082894)
+@@ -1,2 +1,111 @@
++import Authentication.Account;
++import Authentication.Customer;
++import OrderManagement.ShoppingCart;
++import StockManagement.Item;
++import org.json.simple.JSONObject;
++import org.json.simple.JSONArray;
++import org.json.simple.parser.JSONParser;
++import org.json.simple.parser.ParseException;
++
++import java.io.FileReader;
++import java.io.FileWriter;
++import java.io.IOException;
++import java.util.Map;
++
+ public class DataManager {
++    private JSONObject data;
++    DataManager(){
++        loadData();
++    }
++    private JSONObject toJsonObj(Customer acc){
++        JSONObject user = new JSONObject();
++        user.put("id",acc.getAccountID());
++        user.put("name",acc.getName());
++        user.put("password",acc.getPassword());
++        user.put("phone",acc.getPhone());
++        user.put("email",acc.getEmail());
++        user.put("isAdmin",acc.isAdmin());
++        user.put("cart",toJsonObj(acc.getCart()));
++        user.put("address",acc.getAddress());
++        return user;
++    }
++    private JSONObject toJsonObj(ShoppingCart Cart){
++        JSONObject cart = new JSONObject();
++        //map of item not string Waleed:>)
++        for( Map.Entry<String, Integer> entry: Cart.getCartItems().entrySet()) {
++            cart.put(entry.getKey(),entry.getValue());
++        }
++        return cart;
++    }
++    private JSONObject toJsonObj(Item it){
++        JSONObject item = new JSONObject();
++        item.put("id",it.getId());
++        item.put("name",it.getName());
++        item.put("loyaltyPoints",it.getLoyaltyPoints());
++        item.put("category",it.getCategory());
++        item.put("price",it.getPrice());
++        item.put("timesOrdered",it.getTimesOrdered());
++        item.put("description",it.getDescription());
++        return item;
++    }
++    private void loadData(){
++        JSONParser parser = new JSONParser();
++        try {
++            data = (JSONObject) parser.parse(new FileReader("Data.json"));
++        }catch (IOException e) {
++            e.printStackTrace();
++        } catch (ParseException e) {
++            throw new RuntimeException(e);
++        }
++    }
++    private void saveData(){
++        try {
++            FileWriter file = new FileWriter("Data.json");
++            file.write(data.toJSONString());
++            file.close();
++        }catch (IOException e) {
++            e.printStackTrace();
++        }
++    }
++    private ShoppingCart getCart( JSONObject CartJson){
++        ShoppingCart cart = new ShoppingCart();
++        return cart;
++    }
++    public Customer getCustomer(String id){
++        JSONObject customerJson =(JSONObject)((JSONObject)(data.get("users"))).get(id);
++        Customer customer = new Customer(
++                (String) customerJson.get("id"),
++                (String) customerJson.get("name"),
++                (String) customerJson.get("password"),
++                (String) customerJson.get("phone"),
++                (String) customerJson.get("email"),
++                (boolean)  customerJson.get("isAdmin"),
++                getCart((JSONObject)customerJson.get("cart")),
++                (String) customerJson.get("address"));
++        return customer;
++    }
++    public Item getItem(String id){
++        if(data.get("items") == null){
++            System.out.print("No items found");
++//            return new Item();
++        }
++        JSONObject customerJson =(JSONObject)((JSONObject)(data.get("items"))).get(id);
++        Item customer = new Item(
++                (String) customerJson.get("id"),
++                (String) customerJson.get("name"),
++                (int) customerJson.get("password"),
++                (String) customerJson.get("phone"),
++                (String) customerJson.get("email"),
++                (int)  customerJson.get("isAdmin"),
++                (double) customerJson.get("address"));
++        return customer;
++    }
++    public void setCustomer(Customer customer){
++        if(data.get("users") == null){ data.put("users",new JSONObject());}
++        ((JSONObject)(data.get("users"))).put(customer.getAccountID(),toJsonObj(customer));
++        saveData();
++    }
++    public void print(){
++        System.out.print(data.toString());
++    }
+ }
+Index: src/OrderManagement/ShoppingCart.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package OrderManagement;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\nimport Authentication.Account;\r\n\r\npublic class ShoppingCart {\r\n    private HashMap<String, Integer> cartItems = new HashMap<>();\r\n    private double totalPrice;\r\n    private Account customer;\r\n\r\n    public void calcTotal() {\r\n        //loop 3la value el items wa update el total price\r\n        totalPrice = 100;\r\n    }\r\n\r\n    public void addItem(String item, int amount) {\r\n        // add item to cartItems if it didn't exist\r\n        if (cartItems.containsKey(item)) {\r\n            // add defensive if total amount > 50 ?\r\n            cartItems.put(item, cartItems.get(item) + amount);\r\n        } else {\r\n            cartItems.put(item, amount);\r\n        }\r\n        // lw hktb item added msg\r\n    }\r\n\r\n    public void removeItem(String item, int amount) {\r\n        if (cartItems.containsKey(item)) {\r\n            if (cartItems.get(item) - amount > 0) {\r\n                cartItems.put(item, cartItems.get(item) - amount);\r\n            } else {\r\n                cartItems.remove(item);\r\n            }\r\n        }\r\n        // lw hktb item removed msg\r\n    }\r\n\r\n    public void viewCart() {\r\n        //etb3 el item be shyaka\r\n        for (Map.Entry<String, Integer> entry : cartItems.entrySet()) {\r\n            System.out.println(entry.getKey() + \": \" + entry.getValue());\r\n        }\r\n        calcTotal();\r\n        System.out.println(\"Total price: \" + totalPrice);\r\n        System.out.println();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/OrderManagement/ShoppingCart.java b/src/OrderManagement/ShoppingCart.java
+--- a/src/OrderManagement/ShoppingCart.java	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/src/OrderManagement/ShoppingCart.java	(date 1683317706244)
+@@ -8,6 +8,11 @@
+ public class ShoppingCart {
+     private HashMap<String, Integer> cartItems = new HashMap<>();
+     private double totalPrice;
++
++    public HashMap<String, Integer> getCartItems() {
++        return cartItems;
++    }
++
+     private Account customer;
+ 
+     public void calcTotal() {
+Index: src/Authentication/Admin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Authentication;\r\n\r\npublic class Admin {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Authentication/Admin.java b/src/Authentication/Admin.java
+--- a/src/Authentication/Admin.java	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/src/Authentication/Admin.java	(date 1683312916363)
+@@ -1,4 +1,7 @@
+ package Authentication;
+ 
+-public class Admin {
++public class Admin extends Account{
++    public Admin(String accountID, String name,String password, String phone, String email, boolean isAdmin) {
++        super(accountID,name, password, phone, email, isAdmin);
++    }
+ }
+Index: src/Authentication/Customer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Authentication;\r\nimport OrderManagement.ShoppingCart;\r\n\r\npublic class Customer extends Account {\r\n    private ShoppingCart cart;\r\n    private int loyaltyPoints;\r\n    private boolean isSuspend;\r\n    private String address;\r\n    public Customer(int accountID, String password, String phone, String email, Boolean isAdmin, ShoppingCart cart, int loyaltyPoints, boolean isSuspend, String address) {\r\n        super(accountID, password, phone, email, isAdmin);\r\n        this.cart = cart;\r\n        this.loyaltyPoints = loyaltyPoints;\r\n        this.isSuspend = isSuspend;\r\n        this.address = address;\r\n    }\r\n    public ShoppingCart getCart() {\r\n        return cart;\r\n    }\r\n\r\n    public void setCart(ShoppingCart cart) {\r\n        this.cart = cart;\r\n    }\r\n\r\n    public int getLoyaltyPoints() {\r\n        return loyaltyPoints;\r\n    }\r\n\r\n    public void setLoyaltyPoints(int loyaltyPoints) {\r\n        this.loyaltyPoints = loyaltyPoints;\r\n    }\r\n\r\n    public boolean isSuspend() {\r\n        return isSuspend;\r\n    }\r\n\r\n    public void setSuspend(boolean suspend) {\r\n        isSuspend = suspend;\r\n    }\r\n\r\n    public String getAddress() {\r\n        return address;\r\n    }\r\n\r\n    public void setAddress(String address) {\r\n        this.address = address;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Authentication/Customer.java b/src/Authentication/Customer.java
+--- a/src/Authentication/Customer.java	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/src/Authentication/Customer.java	(date 1683319595024)
+@@ -6,11 +6,9 @@
+     private int loyaltyPoints;
+     private boolean isSuspend;
+     private String address;
+-    public Customer(int accountID, String password, String phone, String email, Boolean isAdmin, ShoppingCart cart, int loyaltyPoints, boolean isSuspend, String address) {
+-        super(accountID, password, phone, email, isAdmin);
++    public Customer(String accountID,String name, String password, String phone, String email, Boolean isAdmin, ShoppingCart cart, String address) {
++        super(accountID,name, password, phone, email, isAdmin);
+         this.cart = cart;
+-        this.loyaltyPoints = loyaltyPoints;
+-        this.isSuspend = isSuspend;
+         this.address = address;
+     }
+     public ShoppingCart getCart() {
+Index: src/Authentication/Account.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Authentication;\r\n\r\npublic class Account {\r\n    private int accountID ;\r\n    private String password ;\r\n    private String phone ;\r\n    private String email ;\r\n    private boolean isAdmin;\r\n\r\n    public Account(int accountID, String password, String phone, String email, Boolean isAdmin) {\r\n        this.accountID = accountID;\r\n        this.password = password;\r\n        this.phone = phone;\r\n        this.email = email;\r\n        this.isAdmin = isAdmin;\r\n    }\r\n\r\n    public int getAccountID() {\r\n        return accountID;\r\n    }\r\n\r\n    public void setAccountID(int accountID) {\r\n        this.accountID = accountID;\r\n    }\r\n\r\n    public String getPassword() {\r\n        return password;\r\n    }\r\n\r\n    public void setPassword(String password) {\r\n        this.password = password;\r\n    }\r\n\r\n    public String getPhone() {\r\n        return phone;\r\n    }\r\n\r\n    public void setPhone(String phone) {\r\n        this.phone = phone;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n        this.email = email;\r\n    }\r\n\r\n    public boolean getAdmin() {\r\n        return isAdmin;\r\n    }\r\n    public void setAdmin(boolean admin) {\r\n        isAdmin = admin;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Authentication/Account.java b/src/Authentication/Account.java
+--- a/src/Authentication/Account.java	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/src/Authentication/Account.java	(date 1683312880989)
+@@ -1,25 +1,36 @@
+ package Authentication;
+ 
+ public class Account {
+-    private int accountID ;
++    private String accountID ;
++
++    private String name;
+     private String password ;
+     private String phone ;
+     private String email ;
+     private boolean isAdmin;
+ 
+-    public Account(int accountID, String password, String phone, String email, Boolean isAdmin) {
++    public Account(String accountID,String name, String password, String phone, String email, boolean isAdmin ) {
+         this.accountID = accountID;
++        this.name = name;
+         this.password = password;
+         this.phone = phone;
+         this.email = email;
+         this.isAdmin = isAdmin;
+     }
+ 
+-    public int getAccountID() {
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    public String getAccountID() {
+         return accountID;
+     }
+ 
+-    public void setAccountID(int accountID) {
++    public void setAccountID(String accountID) {
+         this.accountID = accountID;
+     }
+ 
+@@ -47,7 +58,7 @@
+         this.email = email;
+     }
+ 
+-    public boolean getAdmin() {
++    public boolean isAdmin() {
+         return isAdmin;
+     }
+     public void setAdmin(boolean admin) {
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"Hello world!\");\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/src/Main.java	(date 1683320740507)
+@@ -1,6 +1,9 @@
++import Authentication.Customer;
++import OrderManagement.ShoppingCart;
++
+ public class Main {
+     public static void main(String[] args) {
+-        System.out.println("Hello world!");
++
+     }
+ 
+ 
+Index: Data.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Data.json b/Data.json
+new file mode 100644
+--- /dev/null	(date 1683320271286)
++++ b/Data.json	(date 1683320271286)
+@@ -0,0 +1,1 @@
++{"users":{"22":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"22","isAdmin":true,"email":"dsa@das","cart":{"ttt":5,"kkk":5}},"11":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"11","isAdmin":true,"email":"dsa@das","cart":{"ttt":5,"kkk":5}}}}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"207e6437-854f-4a61-8858-d1d8b395775d\" name=\"Changes\" comment=\"add Authentication\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/StockManagement/Item.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Authentication/Account.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Authentication/Account.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/OrderManagement/OrderManagement.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/OrderManagement/OrderManagement.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2PHjJprfBpjPobQMyMbqqAf1ON1\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"207e6437-854f-4a61-8858-d1d8b395775d\" name=\"Changes\" comment=\"\" />\r\n      <created>1683120832966</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1683120832966</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"add Authentication\">\r\n      <created>1683198244878</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683198244878</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"add Authentication\">\r\n      <created>1683206105368</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683206105368</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"add Authentication\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add Authentication\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/Toffee_TechTitans$Main.ic\" NAME=\"Main Coverage Results\" MODIFIED=\"1683122861790\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/.idea/workspace.xml	(date 1683317706621)
+@@ -4,11 +4,19 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="add Authentication">
+-      <change afterPath="$PROJECT_DIR$/src/StockManagement/Item.java" afterDir="false" />
++    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="add Item">
++      <change afterPath="$PROJECT_DIR$/.idea/libraries/googlecode_json_simple.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Data.json" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/lib/json-simple-1.1-sources.jar" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/lib/json-simple-1.1.jar" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Toffee_TechTitans.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Toffee_TechTitans.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Authentication/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Account.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Authentication/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Admin.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Authentication/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Customer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataManager.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -29,16 +37,28 @@
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectId" id="2PHjJprfBpjPobQMyMbqqAf1ON1" />
+-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "Downloaded.Files.Path.Enabled": "true",
++    "Repository.Attach.Annotations": "false",
++    "Repository.Attach.JavaDocs": "false",
++    "Repository.Attach.Sources": "false",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "jdk.selected.JAVA_MODULE": "openjdk-20",
++    "last_opened_file_path": "C:/Users/karee/IdeaProjects/untitled1",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0"
+   }
+ }]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+@@ -64,12 +84,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1683206105368</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="add Item">
++      <created>1683207354450</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1683207354450</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
++    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+     <MESSAGE value="add Authentication" />
+-    <option name="LAST_COMMIT_MESSAGE" value="add Authentication" />
++    <MESSAGE value="add Item" />
++    <option name="LAST_COMMIT_MESSAGE" value="add Item" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+Index: Toffee_TechTitans.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Toffee_TechTitans.iml b/Toffee_TechTitans.iml
+--- a/Toffee_TechTitans.iml	(revision 703dd76dc524c8e5f95752dac65b46a6c5b37255)
++++ b/Toffee_TechTitans.iml	(date 1683311656952)
+@@ -7,5 +7,6 @@
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="googlecode.json.simple" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/libraries/googlecode_json_simple.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/googlecode_json_simple.xml b/.idea/libraries/googlecode_json_simple.xml
+new file mode 100644
+--- /dev/null	(date 1683311656969)
++++ b/.idea/libraries/googlecode_json_simple.xml	(date 1683311656969)
+@@ -0,0 +1,12 @@
++<component name="libraryTable">
++  <library name="googlecode.json.simple" type="repository">
++    <properties maven-id="com.googlecode.json-simple:json-simple:1.1" />
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
