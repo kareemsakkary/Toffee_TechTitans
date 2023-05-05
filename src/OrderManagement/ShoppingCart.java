@@ -4,18 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Authentication.Account;
+import StockManagement.Item;
 
 public class ShoppingCart {
-    private HashMap<String, Integer> cartItems = new HashMap<>();
-    private double totalPrice;
+    private HashMap<Item, Integer> cartItems = new HashMap<>();
+    private float totalPrice;
     private Account customer;
 
-    public void calcTotal() {
-        //loop 3la value el items wa update el total price
-        totalPrice = 100;
-    }
 
-    public void addItem(String item, int amount) {
+    public void addItem(Item item, int amount) {
         // add item to cartItems if it didn't exist
         if (cartItems.containsKey(item)) {
             // add defensive if total amount > 50 ?
@@ -23,26 +20,32 @@ public class ShoppingCart {
         } else {
             cartItems.put(item, amount);
         }
-        // lw hktb item added msg
+        totalPrice += item.getPrice() * amount;
     }
 
-    public void removeItem(String item, int amount) {
+    public void removeItem(Item item, int amount) {
         if (cartItems.containsKey(item)) {
             if (cartItems.get(item) - amount > 0) {
+                totalPrice -= item.getPrice() * amount;
                 cartItems.put(item, cartItems.get(item) - amount);
             } else {
+                totalPrice -= cartItems.get(item) * item.getPrice();
                 cartItems.remove(item);
             }
         }
-        // lw hktb item removed msg
     }
 
     public void viewCart() {
         //etb3 el item be shyaka
-        for (Map.Entry<String, Integer> entry : cartItems.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+        int cnt = 1;
+        for (Map.Entry<Item, Integer> entry : cartItems.entrySet()) {
+            Item item = entry.getKey();
+            System.out.println(cnt + ". Name: " + item.getName());
+            System.out.println("Price: " + item.getPrice());
+            System.out.println("Qnt. : " + entry.getValue());
+            cnt++;
+            System.out.println();
         }
-        calcTotal();
         System.out.println("Total price: " + totalPrice);
         System.out.println();
     }
