@@ -41,10 +41,10 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         //temp = orders.get(loggedIn);
         //temp.add(order);
         //orders.put(loggedIn, order);
-        System.out.println();
+        System.out.println("Order placed and pending");
     } // logged in is global
 
-    public boolean placeOrder() {
+    public void placeOrder() {
 //        Account loggedInUser = Authentication.LoggedInUser;
         Scanner input = new Scanner(System.in);
         String option = "3";
@@ -58,15 +58,20 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         }
         if (option.equals("2")) {
             System.out.println("\nOrder canceled!\n");
-            return false;
+            return;
         }
         System.out.println();
 
         Payment bill = new Payment();
         if (!bill.choosePayment()) // by7sl feha set lel payment method
-            return false;
-        bill.useVoucher();
-        bill.useLoyalty();
+        {
+            System.out.println("\nPlacing order failed!\n");
+            return;
+        }
+//      msh 3arf lsa hanshelhom wla l2
+//        bill.useVoucher();
+//        bill.useLoyalty();
+
         //bill.setCustomer(loggedIn);
 
         Order ord = new Order();
@@ -80,7 +85,6 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         //ord.setOrderDate(); idk
 
         checkOut(ord); // updates orders map
-        return true;
     } // logged in is global
 
 }

@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="added ui">
+    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="Manager's viewCartScreen done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Authentication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +54,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683120832966</updated>
-      <workItem from="1683290435235" duration="3412000" />
+      <workItem from="1683290435235" duration="9643000" />
     </task>
     <task id="LOCAL-00001" summary="add Authentication">
       <created>1683198244878</created>
@@ -71,7 +70,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683206105368</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Made use of class Item">
+      <created>1683294027528</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683294027528</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Manager's viewCartScreen done">
+      <created>1683320152154</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1683320152154</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,8 +103,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add Authentication" />
-    <MESSAGE value="added ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ui" />
+    <MESSAGE value="Made use of class Item" />
+    <MESSAGE value="Manager's viewCartScreen done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manager's viewCartScreen done" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
