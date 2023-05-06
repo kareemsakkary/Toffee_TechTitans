@@ -1,7 +1,6 @@
 package StockManagement;
 
 import Manager.DataManager;
-
 import java.util.Vector;
 
 public class StockManagement {
