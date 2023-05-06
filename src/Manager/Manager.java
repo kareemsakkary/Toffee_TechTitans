@@ -119,7 +119,8 @@ public class Manager {
                         Please choose one of the following options:
                         1. View Users
                         2. View Items
-                        3. Logout
+                        3. View Orders
+                        4. Logout
                         """;
                 System.out.print(txtBlock);
                 int choice = scan.nextInt();

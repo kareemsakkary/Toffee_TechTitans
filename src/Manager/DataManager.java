@@ -3,6 +3,7 @@ package Manager;
 import Authentication.Account;
 import Authentication.Admin;
 import Authentication.Customer;
+import OrderManagement.Order;
 import OrderManagement.ShoppingCart;
 import StockManagement.Category;
 import StockManagement.Item;
@@ -51,6 +52,16 @@ public class DataManager {
         item.put("price",it.getPrice());
         item.put("timesOrdered",it.getTimesOrdered());
         return item;
+    }
+    private JSONObject toJsonObj(Order order){
+        JSONObject orderJson = new JSONObject();
+//        item.put("id",it.getId());
+//        item.put("name",it.getName());
+//        item.put("loyaltyPoints",it.getLoyaltyPoints());
+//        item.put("category",it.getCategory());
+//        item.put("price",it.getPrice());
+//        item.put("timesOrdered",it.getTimesOrdered());
+        return orderJson;
     }
     private void loadData(){
         JSONParser parser = new JSONParser();
@@ -154,6 +165,16 @@ public class DataManager {
             data.put("itemSize",Integer.toString(sz));
         }
         ((JSONObject)(data.get("items"))).put(item.getId(),toJsonObj(item));
+        saveData();
+    }
+    public void setOrder(Order order){
+        if(data.get("users") == null){ data.put("users",new JSONObject());}
+        if(((JSONObject)(data.get("users"))).get(order.getOrderID()) == null){
+            int sz = accountSize();
+            sz++;
+            data.put("accSize",Integer.toString(sz));
+        }
+        ((JSONObject)(data.get("users"))).put(order.getOrderID(),toJsonObj(order));
         saveData();
     }
     public Account checkAuth(String email , String pass){

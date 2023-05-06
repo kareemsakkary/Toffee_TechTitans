@@ -1,1 +1,13 @@
-{"accSize":"3","itemSize":"2","items":{"22":{"price":99.0,"name":"waleed","timesOrdered":0,"id":"22","category":"aaa","loyaltyPoints":4},"333":{"price":44.0,"name":"candy","timesOrdered":0,"id":"333","category":"aaa","loyaltyPoints":4},"size":"2"},"users":{"22":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"22","isAdmin":false,"email":"dsa@das","cart":{"22":"5","333":"5"}},"11":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"11","isAdmin":true,"email":"dsaaa@das","cart":{"22":"5","333":"5"}},"3":{"password":"123456789","address":"asdsa","phone":"123123","name":"kareem","id":"3","isAdmin":false,"email":"kareem@gmail.com","cart":{}}}}
+{
+  "accSize":"3",
+  "itemSize":"2",
+  "items":{
+    "1":{"price":99.0,"name":"waleed","timesOrdered":0,"id":"22","category":"aaa"},
+    "2":{"price":44.0,"name":"candy","timesOrdered":0,"id":"333","category":"aaa"}
+  },
+  "users":{
+    "1":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"22","isAdmin":false,"email":"dsa@das","cart":{"22":"5","333":"5"}},
+    "2":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"11","isAdmin":true,"email":"dsaaa@das","cart":{"22":"5","333":"5"}},
+    "3":{"password":"123456789","address":"asdsa","phone":"123123","name":"kareem","id":"3","isAdmin":false,"email":"kareem@gmail.com","cart":{}}
+  }
+}
