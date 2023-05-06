@@ -74,7 +74,7 @@ public class DataManager {
     private ShoppingCart getCart(JSONObject CartJson){
         ShoppingCart cart = new ShoppingCart();
         for(Object entry: CartJson.keySet()){
-            System.out.print(CartJson.get(entry.toString()));
+//            System.out.print(CartJson.get(entry.toString()));
             cart.addItem(getItem(entry.toString()) , Integer.parseInt((String)CartJson.get(entry.toString())));
         }
         return cart;
@@ -138,11 +138,21 @@ public class DataManager {
     }
     public void setCustomer(Customer customer){
         if(data.get("users") == null){ data.put("users",new JSONObject());}
+        if(((JSONObject)(data.get("users"))).get(customer.getAccountID()) == null){
+            int sz = accountSize();
+            sz++;
+            data.put("accSize",Integer.toString(sz));
+        }
         ((JSONObject)(data.get("users"))).put(customer.getAccountID(),toJsonObj(customer));
         saveData();
     }
     public void setItem(Item item){
         if(data.get("items") == null){ data.put("items",new JSONObject());}
+        if(((JSONObject)(data.get("items"))).get(item.getId()) == null){
+            int sz = itemSize();
+            sz++;
+            data.put("itemSize",Integer.toString(sz));
+        }
         ((JSONObject)(data.get("items"))).put(item.getId(),toJsonObj(item));
         saveData();
     }
@@ -154,14 +164,31 @@ public class DataManager {
 
                 if(((JSONObject)user).get("email").toString().equals(email)
                 && ((JSONObject)user).get("password").toString().equals(pass)){
-
                     if((boolean)((JSONObject)user).get("isAdmin"))acc = getAdmin((JSONObject)user);
                     else acc = getCustomer((JSONObject)user);
-
                 }
             }
         }
         return acc;
+    }
+    public int accountSize(){
+        if(data.get("accSize") == null){ return 0;}
+        return Integer.parseInt(data.get("accSize").toString());
+    }
+    public int itemSize(){
+        if(data.get("itemSize") == null){ return 0;}
+        return Integer.parseInt((data.get("itemSize")).toString());
+    }
+    public boolean emailExist(String email){
+        JSONObject users = (JSONObject) data.get("users");
+        if(users!=null){
+            for(Object user : users.values()){
+                if(((JSONObject)user).get("email").toString().equals(email)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     public Vector<Item> getCatalog(){
         Vector<Item> getCatalog = new Vector<Item>();

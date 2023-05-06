@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="add DataManager">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="Done Data manger &amp; Auth except Register">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Authentication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StockManagement/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StockManagement/Item.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,14 +89,22 @@
       <option name="project" value="LOCAL" />
       <updated>1683323462293</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Done Data manger &amp; Auth except Register">
+      <created>1683371783427</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683371783427</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add Authentication" />
     <MESSAGE value="add DataManagerge" />
     <MESSAGE value="add DataManager" />
-    <option name="LAST_COMMIT_MESSAGE" value="add DataManager" />
+    <MESSAGE value="Done Data manger &amp; Auth except Register" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done Data manger &amp; Auth except Register" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
