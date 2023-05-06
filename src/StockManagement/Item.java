@@ -2,7 +2,7 @@ package StockManagement;
 
 
 public class Item {
-    private String id; // set manually or automatic?
+    private String id;
     private String name;
     private int loyaltyPoints;
     private String category;
@@ -63,17 +63,11 @@ public class Item {
     public void setPrice(double price) {
         this.price = price;
     }
-    public void updateItem(){
 
-    }
     public void viewItem(){
         System.out.println("Name: " + this.getName());
         System.out.println("Price: " + this.getPrice() + " EGP");
         System.out.println("Category: " + this.getCategory());
         System.out.println("Loyalty Points: " + this.getLoyaltyPoints() + " points");
-    }
-
-    void printStatisticsOfItem(){
-
     }
 }

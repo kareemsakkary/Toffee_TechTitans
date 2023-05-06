@@ -90,8 +90,10 @@ public class Authentication {
                 address
         );
         DM.setCustomer(customer);
+        System.out.println("Registered successfully!");
     }
     public void logout(){
         LoggedInUser = null;
+        System.out.println("Logged out successfully!");
     }
 }

@@ -1,5 +1,4 @@
-import Authentication.Authentication;
-import Authentication.Customer;
+import StockManagement.Item;
 import Manager.Manager;
 import StockManagement.Item;
 import Manager.DataManager;
@@ -8,5 +7,4 @@ public class Main {
         Manager M = new Manager();
         M.run();
     }
-
 }

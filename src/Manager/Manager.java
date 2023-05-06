@@ -21,6 +21,101 @@ public class Manager {
     }
 
     public void viewItemsScreen() {
+        while (true) {
+            stckManager.viewCatalog();
+            if (LoggedInUser instanceof Customer) {
+                Scanner scan = new Scanner(System.in);
+                String txtBlock = """ 
+                        Please choose one of the following options:
+                        1. Add Item to Cart
+                        2. Logout
+                        3. Return back
+                        """;
+                System.out.print(txtBlock);
+                int choice = scan.nextInt();
+                switch (choice) {
+                    case 1:
+                        ShoppingCart cart = ((Customer) LoggedInUser).getCart();
+                        System.out.print("Please enter the item number: ");
+                        int itemNum = scan.nextInt();
+                        boolean found = false;
+                        for (int i = 0; i < stckManager.getCategories().size(); i++) {
+                            if(itemNum - 1 == i){
+                                Item target = stckManager.getCategories().get(i);
+                                cart.addItem(target ,1);
+                                found = true;
+                                System.out.println("Item added successfully!\n");
+                            }
+                        }
+                        if(!found)
+                            System.out.println("Invalid item number, doesn't exist!");
+                        break;
+                    case 2:
+                        auth.logout();
+                        return;
+                    case 3:
+                        return;
+                    default:
+                        System.out.print("Invalid choice!");
+                        System.exit(0);
+                }
+            }
+            else if (LoggedInUser instanceof Admin) {
+                Scanner scan = new Scanner(System.in);
+                String txtBlock = """ 
+                        Please choose one of the following options:
+                        1. Add Item
+                        2. Remove Item
+                        3. Logout
+                        4. Return back
+                        """;
+                System.out.print(txtBlock);
+                int choice = scan.nextInt();
+                switch (choice) {
+                    case 1:
+                        // added when admin functions is implemented
+                        // add item to catalog
+                        break;
+                    case 2:
+                        // added when admin functions is implemented
+                        // remove item from catalog
+                        break;
+                    case 3:
+                        auth.logout();
+                        return;
+                    case 4:
+                       return;
+                    default:
+                        System.out.print("Invalid choice!");
+                        System.exit(0);
+                }
+            }
+            else {
+                Scanner scan = new Scanner(System.in);
+                String txtBlock = """ 
+                        Please choose one of the following options:
+                        1. Register
+                        2. Login
+                        3. Return back
+                        """;
+                System.out.print(txtBlock);
+                int choice = scan.nextInt();
+                switch (choice) {
+                    case 1:
+                        auth.register();
+                        break;
+                    case 2:
+                        auth.login();
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        System.out.print("Invalid choice!");
+                        System.exit(0);
+                }
+
+            }
+        }
 
     }
 
@@ -129,8 +224,12 @@ public class Manager {
                 } else if (choice == 2) {
                     viewItemsScreen();
                 } else if (choice == 3) {
-                    viewItemsScreen();
-                } else {
+//                    viewOrdersScreen();
+                }
+                else if (choice == 4) {
+                    auth.logout();
+                }
+                else {
                     System.out.print("Invalid choice!");
                     System.exit(0);
                 }
