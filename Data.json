@@ -1,1 +1,12 @@
-{"items":{"22":{"price":99.0,"name":"candy","timesOrdered":0,"id":"22","category":"aaa","loyaltyPoints":4},"333":{"price":44.0,"name":"candy","timesOrdered":0,"id":"333","category":"aaa","loyaltyPoints":4}},"users":{"22":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"22","isAdmin":true,"email":"dsa@das","cart":{"ttt":5,"kkk":5}},"11":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"11","isAdmin":true,"email":"dsa@das","cart":{"ttt":5,"kkk":5}}}}
+{
+  "items":
+  {
+    "22": {"price":99.0,"name":"waleed","timesOrdered":0,"id":"22","category":"aaa","loyaltyPoints":4},
+    "333":{"price":44.0,"name":"candy","timesOrdered":0,"id":"333","category":"aaa","loyaltyPoints":4}
+  },
+  "users":
+  {
+    "22":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"22","isAdmin":false,"email":"dsa@das","cart":{"22":"5","333":"5"}},
+    "11":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"11","isAdmin":true,"email":"dsaaa@das","cart":{"333":"5","22":"5"}}
+  }
+}

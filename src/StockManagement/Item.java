@@ -9,10 +9,10 @@ public class Item {
     private int timesOrdered = 0;
     private double price;
 
-    public Item(String id, String name, int loyaltyPoints, String category, double price) {
+    public Item(String id, String name, String category, double price) {
         this.id = id;
         this.name = name;
-        this.loyaltyPoints = loyaltyPoints;
+//        this.loyaltyPoints = loyaltyPoints;
         this.category = category;
         this.price = price;
     }
