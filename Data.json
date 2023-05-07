@@ -1,1 +1,19 @@
-{"accSize":"9","itemSize":"2","items":{"1":{"price":99.0,"name":"waleed","timesOrdered":0,"id":"22","category":"aaa"},"2":{"price":44.0,"name":"candy","timesOrdered":0,"id":"333","category":"aaa"}},"users":{"1":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"22","isAdmin":false,"email":"dsa@das","cart":{"22":"5","333":"5"}},"2":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"11","isAdmin":true,"email":"dsaaa@das","cart":{"22":"5","333":"5"}},"3":{"password":"123456789","address":"asdsa","phone":"123123","name":"kareem","id":"3","isAdmin":false,"email":"kareem@gmail.com","cart":{}},"4":{"password":"nada","address":"maadi","phone":"1234568","name":"nda","id":"4","isAdmin":false,"email":"nda@gmail.com","cart":{}},"5":{"password":"nada","address":"mm","phone":"123","name":"nada","id":"5","isAdmin":false,"email":"nada@gmail.com","cart":{}},"6":{"password":"hassan","address":"fcai","phone":"1234","name":"hassan","id":"6","isAdmin":false,"email":"hassan@morad","cart":{}},"7":{"password":"boo","address":"maadi","phone":"123","name":"boo","id":"7","isAdmin":false,"email":"boo@gmail.com","cart":{}},"8":{"password":"xd","address":"xd","phone":"1234","name":"xd","id":"8","isAdmin":false,"email":"xd@gmail.com","cart":{}},"9":{"password":"nada","address":"dd","phone":"122","name":"nada@gmail.comm","id":"9","isAdmin":false,"email":"nada","cart":{}}}}
+ {
+   "accSize":"9",
+   "itemSize":"2",
+   "items":
+           {"1":{"price":99.0,"name":"waleed","timesOrdered":0,"id":"22","category":"aaa"},
+            "2":{"price":44.0,"name":"candy","timesOrdered":0,"id":"333","category":"aaa"}
+            },
+  "users":
+          {"1": {"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"1","isAdmin":false,"email":"dsa@das","cart":{"22":"5","333":"5"}},
+            "2":{"password":"asdd","address":"adsa","phone":"213312","name":"sakkary","id":"2","isAdmin":true,"email":"dsaaa@das","cart":{"22":"5","333":"5"}},
+            "3":{"password":"123456789","address":"asdsa","phone":"123123","name":"kareem","id":"3","isAdmin":false,"email":"kareem@gmail.com","cart":{}},
+            "4":{"password":"nada","address":"maadi","phone":"1234568","name":"nda","id":"4","isAdmin":false,"email":"nda@gmail.com","cart":{}},
+            "5":{"password":"nada","address":"mm","phone":"123","name":"nada","id":"5","isAdmin":false,"email":"nada@gmail.com","cart":{}},
+            "6":{"password":"hassan","address":"fcai","phone":"1234","name":"hassan","id":"6","isAdmin":false,"email":"hassan@morad","cart":{}},
+            "7":{"password":"boo","address":"maadi","phone":"123","name":"boo","id":"7","isAdmin":false,"email":"boo@gmail.com","cart":{}},
+            "8":{"password":"xd","address":"xd","phone":"1234","name":"xd","id":"8","isAdmin":false,"email":"xd@gmail.com","cart":{}},
+            "9":{"password":"nada","address":"dd","phone":"122","name":"nada@gmail.comm","id":"9","isAdmin":false,"email":"nada","cart":{}}
+          }
+ }

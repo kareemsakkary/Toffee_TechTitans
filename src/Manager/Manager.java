@@ -240,6 +240,7 @@ public class Manager {
                         1. Register
                         2. Login
                         3. View Items
+                        4. Exit
                         """;
                 System.out.print(txtBlock);
                 int choice = scan.nextInt();
@@ -249,6 +250,10 @@ public class Manager {
                     auth.login();
                 } else if (choice == 3) {
                     viewItemsScreen();
+                }
+                else if (choice == 4) {
+                    System.out.print("Thank you for using our application!");
+                    System.exit(0);
                 } else {
                     System.out.print("Invalid choice!");
                     System.exit(0);
