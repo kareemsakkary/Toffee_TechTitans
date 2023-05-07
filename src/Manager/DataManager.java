@@ -55,12 +55,13 @@ public class DataManager {
     }
     private JSONObject toJsonObj(Order order){
         JSONObject orderJson = new JSONObject();
-//        item.put("id",it.getId());
-//        item.put("name",it.getName());
-//        item.put("loyaltyPoints",it.getLoyaltyPoints());
-//        item.put("category",it.getCategory());
-//        item.put("price",it.getPrice());
-//        item.put("timesOrdered",it.getTimesOrdered());
+        orderJson.put("id",order.getOrderID());
+        orderJson.put("userId",order.getCart().getCustomer().getAccountID());
+        orderJson.put("cart",toJsonObj(order.getCart()));
+        orderJson.put("statues",order.isStatus());
+        orderJson.put("bill",order.getBill());
+        orderJson.put("date",order.getOrderDate());
+        orderJson.put("address",order.getShippingAddress());
         return orderJson;
     }
     private void loadData(){
@@ -147,6 +148,30 @@ public class DataManager {
                 (double) item.get("price"));
 
     }
+
+    public Order getOrder(String id){
+        if(data.get("Order") == null){
+            System.out.print("No Orders found");
+//            return new Item();
+        }
+        JSONObject order =(JSONObject)((JSONObject)(data.get("items"))).get(id);
+        Order nwOrder = new Order();
+
+        return new Order();
+
+    }
+//    public Item getItem(JSONObject item){
+//        if(data.get("items") == null){
+//            System.out.print("No items found");
+////            return new Item();
+//        }
+//        return new Item(
+//                (String) item.get("id"),
+//                (String) item.get("name"),
+//                (String) item.get("category"),
+//                (double) item.get("price"));
+//
+//    }
     public void setCustomer(Customer customer){
         if(data.get("users") == null){ data.put("users",new JSONObject());}
         if(((JSONObject)(data.get("users"))).get(customer.getAccountID()) == null){
@@ -168,13 +193,13 @@ public class DataManager {
         saveData();
     }
     public void setOrder(Order order){
-        if(data.get("users") == null){ data.put("users",new JSONObject());}
-        if(((JSONObject)(data.get("users"))).get(order.getOrderID()) == null){
-            int sz = accountSize();
+        if(data.get("orders") == null){ data.put("users",new JSONObject());}
+        if(((JSONObject)(data.get("orders"))).get(order.getOrderID()) == null){
+            int sz = orderSize();
             sz++;
-            data.put("accSize",Integer.toString(sz));
+            data.put("orderSize",Integer.toString(sz));
         }
-        ((JSONObject)(data.get("users"))).put(order.getOrderID(),toJsonObj(order));
+        ((JSONObject)(data.get("orders"))).put(order.getOrderID(),toJsonObj(order));
         saveData();
     }
     public Account checkAuth(String email , String pass){
@@ -199,6 +224,10 @@ public class DataManager {
     public int itemSize(){
         if(data.get("itemSize") == null){ return 0;}
         return Integer.parseInt((data.get("itemSize")).toString());
+    }
+    public int orderSize(){
+        if(data.get("orderSize") == null){ return 0;}
+        return Integer.parseInt((data.get("orderSize")).toString());
     }
     public boolean emailExist(String email){
         JSONObject users = (JSONObject) data.get("users");

@@ -10,6 +10,15 @@ import StockManagement.Item;
 public class ShoppingCart {
     private HashMap<Item, Integer> cartItems = new HashMap<>();
     private float totalPrice;
+
+    public Account getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Account customer) {
+        this.customer = customer;
+    }
+
     private Account customer;
 
 
