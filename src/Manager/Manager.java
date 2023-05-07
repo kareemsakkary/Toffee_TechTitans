@@ -97,6 +97,7 @@ public class Manager {
                         1. Register
                         2. Login
                         3. Return back
+                        4. Exit
                         """;
                 System.out.print(txtBlock);
                 int choice = scan.nextInt();
@@ -109,6 +110,9 @@ public class Manager {
                         break;
                     case 3:
                         return;
+                    case 4:
+                        System.out.print("Thank you for using our application!");
+                        System.exit(0);
                     default:
                         System.out.print("Invalid choice!");
                         System.exit(0);
