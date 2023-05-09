@@ -71,61 +71,61 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         Scanner input = new Scanner(System.in);
         Payment payment = new Payment();
         payment.setTotalPrice(total);
-        System.out.println("Total price : " + payment.getTotalPrice() +" after voucher : " + payment.getNetPrice());
-        System.out.println("Choose payment method!");
-        System.out.println("1- Cash");
-        System.out.println("2- Add Voucher");
-        System.out.println("3- Cancel order");
-        System.out.print(">>");
-        String option = input.nextLine();
-        while (!option.equals("3")) {
-            if (option.equals("1")) {
-                for(Voucher v : payment.getVouchers()){
-                    DM.removeVoucher(v);
-                }
-                payment.setPaymentMethod("cash");
-                System.out.println();
-                return payment;
-            }
-            Voucher temp = null;
-            if(option.equals("2")){
-                System.out.println("Enter Code of the voucher :");
-                String code = input.nextLine();
-                Voucher voucher = DM.getVoucher(code);
-                if(voucher != null && !payment.getVouchers().contains(voucher)){
-                    if(voucher.value > payment.getNetPrice()) {
-                        temp = new Voucher(voucher.code, voucher.value - payment.getNetPrice());
-                        voucher.value=payment.getNetPrice();
-                    }
-                    payment.addVoucher(voucher);
-                }else{
-                    System.out.println("Wrong Voucher");
-                }
-            }
-            if(!option.equals("2"))
-                System.out.println("\nInvalid input, try again.\n");
+        Voucher temp = null;
+        label:
+        while (true) {
+            String option;
             System.out.println("Total price : " + payment.getTotalPrice() +" after voucher : " + payment.getNetPrice());
             if(payment.getNetPrice() != 0) {
-                System.out.println("Choose payment method!");
-                System.out.println("1- Cash");
-                System.out.println("2- Add Voucher");
+//                System.out.println("Choose !");
+                System.out.println("1- Add Voucher");
+                System.out.println("2- Checkout and pay with cash");
                 System.out.println("3- Cancel order");
                 System.out.print(">>");
                 option = input.nextLine();
+                switch (option) {
+                    case "2":
+                        for (Voucher v : payment.getVouchers()) {
+                            DM.removeVoucher(v);
+                        }
+                        payment.setPaymentMethod("cash");
+                        System.out.println();
+                        return payment;
+                    case "1":
+                        System.out.println("Enter Code of the voucher :");
+                        String code = input.nextLine();
+                        Voucher voucher = DM.getVoucher(code);
+                        if (voucher != null && !payment.getVouchers().contains(voucher)) {
+                            if (voucher.value > payment.getNetPrice()) {
+                                temp = new Voucher(voucher.code, voucher.value - payment.getNetPrice());
+                                voucher.value = payment.getNetPrice();
+                            }
+                            payment.addVoucher(voucher);
+                        } else {
+                            System.out.println("Wrong Voucher");
+                        }
+                        break;
+                    case "3":
+                        break label;
+                }
             }else{
-                System.out.println("1- checkout");
+                System.out.println("1- Checkout");
                 System.out.println("2- Cancel order");
                 System.out.print(">>");
                 option = input.nextLine();
-                if(option.equals("1")){
-                    for(Voucher v : payment.getVouchers()){
-                        DM.removeVoucher(v);
-                    }
-                    if(temp != null)
-                        DM.setVoucher(temp);
-                    return payment;
+                switch (option) {
+                    case "1":
+                        for (Voucher v : payment.getVouchers()) {
+                            DM.removeVoucher(v);
+                        }
+                        if (temp != null)
+                            DM.setVoucher(temp);
+                        return payment;
+                    case "2":
+                        break label;
                 }
             }
+            System.out.println("\nInvalid input, try again.\n");
         }
         System.out.println("Order Canceled.\n");
         payment = null;

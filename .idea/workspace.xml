@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="place order &amp; voucher">
-      <change beforePath="$PROJECT_DIR$/src/Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" afterDir="false" />
+    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="change quantity in JSON">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683646948369</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="place order &amp; voucher">
+      <created>1683647174966</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1683647174966</updated>
+    </task>
+    <task id="LOCAL-00010" summary="change quantity in JSON">
+      <created>1683647506666</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1683647506666</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -127,22 +141,8 @@
     <MESSAGE value="done register" />
     <MESSAGE value=".." />
     <MESSAGE value="place order &amp; voucher" />
-    <option name="LAST_COMMIT_MESSAGE" value="place order &amp; voucher" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java</url>
-          <line>24</line>
-          <properties class="OrderManagement.ShoppingCart" method="addItem">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="change quantity in JSON" />
+    <option name="LAST_COMMIT_MESSAGE" value="change quantity in JSON" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
