@@ -155,6 +155,7 @@ public class Manager {
                         Item it = v.get(index - 1);
                         cart.removeItem(it, 50);
                         cart.addItem(it, qnt);
+                        DM.setCustomer((Customer)Authentication.LoggedInUser);
                     }
                     break;
                 case "2":
@@ -166,6 +167,7 @@ public class Manager {
                         int index = input.nextInt();
                         Item it = v.get(index - 1);
                         cart.removeItem(it,50);
+                        DM.setCustomer((Customer)Authentication.LoggedInUser);
                     }
                     break;
                 case "3":

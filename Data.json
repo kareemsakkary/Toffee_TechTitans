@@ -190,7 +190,9 @@
       "id": "3",
       "isAdmin": false,
       "email": "kareem@gmail.com",
-      "cart": {}
+      "cart": {
+        "1": "1"
+      }
     },
     "4": {
       "password": "nada",

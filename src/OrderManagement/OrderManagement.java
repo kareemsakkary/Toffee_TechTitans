@@ -98,7 +98,6 @@ public class OrderManagement { // m7tag el user ytzbt el awl
                         voucher.value=payment.getNetPrice();
                     }
                     payment.addVoucher(voucher);
-
                 }else{
                     System.out.println("Wrong Voucher");
                 }
