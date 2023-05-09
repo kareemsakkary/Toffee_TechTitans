@@ -1,14 +1,13 @@
 package OrderManagement;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 public class Order {
     private String orderID;
     private ShoppingCart cart;
     private boolean status;
     private Payment bill;
     private String shippingAddress;
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
@@ -31,7 +30,7 @@ public class Order {
     }
 
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -55,7 +54,7 @@ public class Order {
         return shippingAddress;
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 }

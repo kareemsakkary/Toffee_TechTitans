@@ -13,11 +13,12 @@ public class Manager {
     private OrderManagement ordManager;
     private StockManagement stckManager;
     private Authentication auth;
-
+    private DataManager DM;
     public Manager() {
         this.ordManager = new OrderManagement();
         this.stckManager = new StockManagement();
         this.auth = new Authentication();
+        this.DM = new DataManager();
     }
 
     public void viewItemsScreen() {
@@ -43,6 +44,7 @@ public class Manager {
                             if(itemNum - 1 == i){
                                 Item target = stckManager.getCategories().get(i);
                                 cart.addItem(target ,1);
+                                DM.setCustomer(((Customer) LoggedInUser));
                                 found = true;
                                 System.out.println("Item added successfully!\n");
                             }
@@ -127,7 +129,7 @@ public class Manager {
         Scanner choice = new Scanner(System.in);
         Scanner input = new Scanner(System.in); // m3rfsh eh el bug bs da m5sos lel int
 //        ha5od cart el logged in
-        ShoppingCart cart = new ShoppingCart(); // dummy cart
+        ShoppingCart cart = ((Customer)Authentication.LoggedInUser).getCart(); // dummy cart
         System.out.println("----- YOUR CART ------");
         cart.viewCart();
         System.out.println("1- Change quantity");
@@ -191,6 +193,12 @@ public class Manager {
     }
 
     public void run() {
+        DM.setVoucher(new Voucher("-50" , 50));
+        DM.setVoucher(new Voucher("-40" , 40));
+        DM.setVoucher(new Voucher("-30" , 30));
+        DM.setVoucher(new Voucher("-20" , 20));
+        DM.setVoucher(new Voucher("-10" , 10));
+
         while (true) {
             if (LoggedInUser instanceof Customer) {
                 Scanner scan = new Scanner(System.in);

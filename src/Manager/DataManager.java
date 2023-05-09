@@ -4,7 +4,9 @@ import Authentication.Account;
 import Authentication.Admin;
 import Authentication.Customer;
 import OrderManagement.Order;
+import OrderManagement.Payment;
 import OrderManagement.ShoppingCart;
+import OrderManagement.Voucher;
 import StockManagement.Item;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -14,6 +16,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
@@ -42,6 +45,16 @@ public class DataManager {
         }
         return cart;
     }
+    private JSONObject toJsonObj(Payment payment){
+        JSONObject pay = new JSONObject();
+        pay.put("paymentMethod",payment.getPaymentMethod());
+        JSONObject vouchers = new JSONObject();
+        for(Voucher v  : payment.getVouchers()){
+            vouchers.put(v.getCode(),v.getValue());
+        }
+        pay.put("vouchers",vouchers);
+        return pay;
+    }
     private JSONObject toJsonObj(Item it){
         JSONObject item = new JSONObject();
         item.put("id",it.getId());
@@ -58,11 +71,18 @@ public class DataManager {
         orderJson.put("userId",order.getCart().getCustomer().getAccountID());
         orderJson.put("cart",toJsonObj(order.getCart()));
         orderJson.put("statues",order.isStatus());
-        orderJson.put("bill",order.getBill());
-        orderJson.put("date",order.getOrderDate());
+        orderJson.put("bill",toJsonObj(order.getBill()));
+        orderJson.put("date",order.getOrderDate().toString());
         orderJson.put("address",order.getShippingAddress());
         return orderJson;
     }
+    private JSONObject toJsonObj(Voucher voucher){
+        JSONObject jVoucher = new JSONObject();
+        jVoucher.put("code",voucher.getCode());
+        jVoucher.put("value",voucher.getValue());
+        return jVoucher;
+    }
+
     private void loadData(){
         JSONParser parser = new JSONParser();
         try {
@@ -91,7 +111,13 @@ public class DataManager {
         return cart;
     }
     public Customer getCustomer(String id){
+        if(data.get("users") == null){
+            return null;
+        }
         JSONObject customerJson =(JSONObject)((JSONObject)(data.get("users"))).get(id);
+        if(customerJson == null){
+            return null;
+        }
         return new Customer(
                 (String) customerJson.get("id"),
                 (String) customerJson.get("name"),
@@ -124,10 +150,12 @@ public class DataManager {
     }
     public Item getItem(String id){
         if(data.get("items") == null){
-            System.out.print("No items found");
-//            return new Item();
+            return null;
         }
         JSONObject item =(JSONObject)((JSONObject)(data.get("items"))).get(id);
+        if(item == null){
+            return null;
+        }
         return new Item(
                 (String) item.get("id"),
                 (String) item.get("name"),
@@ -147,30 +175,34 @@ public class DataManager {
                 (double) item.get("price"));
 
     }
-
+    public Voucher getVoucher(String code){
+        if(data.get("vouchers") == null){
+            return null;
+        }
+        JSONObject voucher =(JSONObject)((JSONObject)(data.get("vouchers"))).get(code);
+        if(voucher == null){
+            return null;
+        }
+        return new Voucher(
+                (String) voucher.get("code"),
+                Double.parseDouble(voucher.get("value").toString())
+                );
+    }
     public Order getOrder(String id){
         if(data.get("Order") == null){
             System.out.print("No Orders found");
 //            return new Item();
         }
         JSONObject order =(JSONObject)((JSONObject)(data.get("items"))).get(id);
+        if(order == null){
+            return null;
+        }
         Order nwOrder = new Order();
 
         return new Order();
 
     }
-//    public Item getItem(JSONObject item){
-//        if(data.get("items") == null){
-//            System.out.print("No items found");
-////            return new Item();
-//        }
-//        return new Item(
-//                (String) item.get("id"),
-//                (String) item.get("name"),
-//                (String) item.get("category"),
-//                (double) item.get("price"));
-//
-//    }
+    // Set Data
     public void setCustomer(Customer customer){
         if(data.get("users") == null){ data.put("users",new JSONObject());}
         if(((JSONObject)(data.get("users"))).get(customer.getAccountID()) == null){
@@ -192,7 +224,7 @@ public class DataManager {
         saveData();
     }
     public void setOrder(Order order){
-        if(data.get("orders") == null){ data.put("users",new JSONObject());}
+        if(data.get("orders") == null){ data.put("orders",new JSONObject());}
         if(((JSONObject)(data.get("orders"))).get(order.getOrderID()) == null){
             int sz = orderSize();
             sz++;
@@ -201,21 +233,32 @@ public class DataManager {
         ((JSONObject)(data.get("orders"))).put(order.getOrderID(),toJsonObj(order));
         saveData();
     }
-    public Account checkAuth(String email , String pass){
-        JSONObject users = (JSONObject) data.get("users");
-        Account acc = null;
-        if(users!=null){
-            for(Object user : users.values()){
-
-                if(((JSONObject)user).get("email").toString().equals(email)
-                && ((JSONObject)user).get("password").toString().equals(pass)){
-                    if((boolean)((JSONObject)user).get("isAdmin"))acc = getAdmin((JSONObject)user);
-                    else acc = getCustomer((JSONObject)user);
-                }
-            }
+    public void setVoucher(Voucher voucher){
+        if(data.get("vouchers") == null){ data.put("vouchers",new JSONObject());}
+        if(((JSONObject)(data.get("vouchers"))).get(voucher.getCode()) == null){
+            int sz = voucherSize();
+            sz++;
+            data.put("voucherSize",Integer.toString(sz));
         }
-        return acc;
+        ((JSONObject)(data.get("vouchers"))).put(voucher.getCode(),toJsonObj(voucher));
+        saveData();
     }
+    // delete Data
+    public boolean removeVoucher(Voucher voucher){
+        if(data.get("vouchers") == null){
+            return false;
+        }
+        if(((JSONObject)(data.get("vouchers"))).remove(voucher.getCode()) != null){
+            int sz = voucherSize();
+            sz--;
+            data.put("voucherSize",Integer.toString(sz));
+            saveData();
+            return true;
+        }
+
+        return false;
+    }
+    // Get Data sizes
     public int accountSize(){
         if(data.get("accSize") == null){ return 0;}
         return Integer.parseInt(data.get("accSize").toString());
@@ -227,6 +270,25 @@ public class DataManager {
     public int orderSize(){
         if(data.get("orderSize") == null){ return 0;}
         return Integer.parseInt((data.get("orderSize")).toString());
+    }
+    public int voucherSize(){
+        if(data.get("voucherSize") == null){ return 0;}
+        return Integer.parseInt((data.get("voucherSize")).toString());
+    }
+    public Account checkAuth(String email , String pass){
+        JSONObject users = (JSONObject) data.get("users");
+        Account acc = null;
+        if(users!=null){
+            for(Object user : users.values()){
+
+                if(((JSONObject)user).get("email").toString().equals(email)
+                        && ((JSONObject)user).get("password").toString().equals(pass)){
+                    if((boolean)((JSONObject)user).get("isAdmin"))acc = getAdmin((JSONObject)user);
+                    else acc = getCustomer((JSONObject)user);
+                }
+            }
+        }
+        return acc;
     }
     public boolean emailExist(String email){
         JSONObject users = (JSONObject) data.get("users");

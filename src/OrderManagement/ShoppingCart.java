@@ -64,7 +64,10 @@ public class ShoppingCart {
         System.out.println("Total price: " + totalPrice);
         System.out.println();
     }
-
+    public void clear(){
+        cartItems.clear();
+        totalPrice=0;
+    }
     public float getTotalPrice() {
         return totalPrice;
     }

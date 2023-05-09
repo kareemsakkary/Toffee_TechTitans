@@ -2,7 +2,6 @@ package Authentication;
 
 public class Account {
     private String accountID ;
-
     private String name;
     private String password ;
     private String phone ;

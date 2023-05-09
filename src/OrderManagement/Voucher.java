@@ -4,6 +4,11 @@ public class Voucher { // momken n3ml set of vouchers bnload feha el data men fi
     String code;
     double value;
 
+    public Voucher(String code, double value) {
+        this.code = code;
+        this.value = value;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }

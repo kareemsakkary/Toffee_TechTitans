@@ -9,6 +9,7 @@ public class Customer extends Account {
     public Customer(String accountID,String name, String password, String phone, String email, Boolean isAdmin, ShoppingCart cart, String address) {
         super(accountID,name, password, phone, email, isAdmin);
         this.cart = cart;
+        this.cart.setCustomer(this);
         this.address = address;
     }
     public ShoppingCart getCart() {
