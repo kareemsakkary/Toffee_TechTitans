@@ -44,34 +44,38 @@ public class OrderManagement { // m7tag el user ytzbt el awl
     }
 
 
-    public void useVoucher() {
+    public Voucher addVoucher(Payment payment) {
+        Voucher temp = null;
         Scanner input = new Scanner(System.in);
-        System.out.println("1- Add voucher");
-        System.out.println("2- Proceed with order");
-        System.out.print(">>");
-        String option = input.nextLine();
-        while (!option.equals("2")) {
-            if (option.equals("1")) {
-                System.out.println("Added Voucher!\n");
-                /* Check law el voucher mwgoda fel database wa el 7bshtkanat*/
-                // recalculate el net price
+        System.out.println("Enter Code of the voucher :");
+        String code = input.nextLine();
+        Voucher voucher = DM.getVoucher(code);
+        if (voucher != null && !payment.getVouchers().contains(voucher)) {
+            if (voucher.value > payment.getNetPrice()) {
+                temp = new Voucher(voucher.code, voucher.value - payment.getNetPrice());
+                voucher.value = payment.getNetPrice();
             }
-            if (!option.equals("1"))
-                System.out.println("\nInvalid input, try again.\n");
-            System.out.println("1- Add voucher");
-            System.out.println("2- Proceed with order");
-            System.out.print(">>");
-            option = input.nextLine();
+            payment.addVoucher(voucher);
+        } else {
+            System.out.println("Wrong Voucher");
         }
-        //System.out.println("Using vouchers done!");
-        System.out.println();
+        return temp;
     }
 
+    public void checkout(Payment payment,Voucher temp){
+        for (Voucher v : payment.getVouchers()) {
+            DM.removeVoucher(v);
+        }
+        payment.setPaymentMethod("cash");
+        System.out.println();
+        if (temp != null)
+            DM.setVoucher(temp);
+    }
     public Payment choosePayment(double total) {
         Scanner input = new Scanner(System.in);
         Payment payment = new Payment();
         payment.setTotalPrice(total);
-        Voucher temp = null;
+        Voucher nwVoucher = null;
         label:
         while (true) {
             String option;
@@ -84,27 +88,12 @@ public class OrderManagement { // m7tag el user ytzbt el awl
                 System.out.print(">>");
                 option = input.nextLine();
                 switch (option) {
-                    case "2":
-                        for (Voucher v : payment.getVouchers()) {
-                            DM.removeVoucher(v);
-                        }
-                        payment.setPaymentMethod("cash");
-                        System.out.println();
-                        return payment;
                     case "1":
-                        System.out.println("Enter Code of the voucher :");
-                        String code = input.nextLine();
-                        Voucher voucher = DM.getVoucher(code);
-                        if (voucher != null && !payment.getVouchers().contains(voucher)) {
-                            if (voucher.value > payment.getNetPrice()) {
-                                temp = new Voucher(voucher.code, voucher.value - payment.getNetPrice());
-                                voucher.value = payment.getNetPrice();
-                            }
-                            payment.addVoucher(voucher);
-                        } else {
-                            System.out.println("Wrong Voucher");
-                        }
+                        nwVoucher = addVoucher(payment);
                         break;
+                    case "2":
+                        checkout(payment,nwVoucher);
+                        return payment;
                     case "3":
                         break label;
                 }
@@ -115,11 +104,7 @@ public class OrderManagement { // m7tag el user ytzbt el awl
                 option = input.nextLine();
                 switch (option) {
                     case "1":
-                        for (Voucher v : payment.getVouchers()) {
-                            DM.removeVoucher(v);
-                        }
-                        if (temp != null)
-                            DM.setVoucher(temp);
+                        checkout(payment,nwVoucher);
                         return payment;
                     case "2":
                         break label;
