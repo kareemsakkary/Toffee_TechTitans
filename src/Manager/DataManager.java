@@ -5,7 +5,6 @@ import Authentication.Admin;
 import Authentication.Customer;
 import OrderManagement.Order;
 import OrderManagement.ShoppingCart;
-import StockManagement.Category;
 import StockManagement.Item;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
