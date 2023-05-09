@@ -193,12 +193,11 @@ public class Manager {
     }
 
     public void run() {
-        DM.setVoucher(new Voucher("-50" , 50));
-        DM.setVoucher(new Voucher("-40" , 40));
-        DM.setVoucher(new Voucher("-30" , 30));
-        DM.setVoucher(new Voucher("-20" , 20));
-        DM.setVoucher(new Voucher("-10" , 10));
-
+//        DM.setVoucher(new Voucher("-50" , 50));
+//        DM.setVoucher(new Voucher("-40" , 40));
+//        DM.setVoucher(new Voucher("-30" , 30));
+//        DM.setVoucher(new Voucher("-20" , 20));
+//        DM.setVoucher(new Voucher("-10" , 10));
         while (true) {
             if (LoggedInUser instanceof Customer) {
                 Scanner scan = new Scanner(System.in);

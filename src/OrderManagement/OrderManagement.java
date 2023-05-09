@@ -162,13 +162,17 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         ord.setBill(bill);
 
         ord.setStatus(false); // pending
+
         System.out.print("Choose shipping address: ");
         String address = input.nextLine();
         ord.setShippingAddress(address);
+
         ord.setOrderDate(LocalDateTime.now());
         DM.setOrder(ord);
+
         cart.clear();
         DM.setCustomer((Customer)Authentication.LoggedInUser);
+
         System.out.println("Order placed Successfully!");
     }
 
