@@ -100,14 +100,18 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         return temp;
     }
 
-    public void checkout(Payment payment,Voucher temp){
-        for (Voucher v : payment.getVouchers()) {
-            DM.removeVoucher(v);
+    public boolean checkout(Payment payment,Voucher temp){
+        if(Authentication.checkOTP((Customer) Authentication.LoggedInUser)) {
+            for (Voucher v : payment.getVouchers()) {
+                DM.removeVoucher(v);
+            }
+            payment.setPaymentMethod("cash");
+            System.out.println();
+            if (temp != null)
+                DM.setVoucher(temp);
+            return true;
         }
-        payment.setPaymentMethod("cash");
-        System.out.println();
-        if (temp != null)
-            DM.setVoucher(temp);
+        return false;
     }
     public Payment choosePayment(double total) {
         Scanner input = new Scanner(System.in);
@@ -130,8 +134,11 @@ public class OrderManagement { // m7tag el user ytzbt el awl
                         nwVoucher = addVoucher(payment);
                         break;
                     case "2":
-                        checkout(payment,nwVoucher);
-                        return payment;
+                        if(checkout(payment,nwVoucher)) {
+                            return payment;
+                        }else{
+                            return null;
+                        }
                     case "3":
                         break label;
                 }
@@ -180,20 +187,25 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         ShoppingCart cart = ((Customer) Authentication.LoggedInUser).getCart();
         ord.setCart(cart);
 
-        Payment bill = choosePayment(cart.getTotalPrice());
-        ord.setBill(bill);
-        ord.setStatus("pending"); // pending
         System.out.print("Choose shipping address: ");
         String address = input.nextLine();
         ord.setShippingAddress(address);
 
-        ord.setOrderDate(LocalDateTime.now());
-        DM.setOrder(ord);
+        Payment bill = choosePayment(cart.getTotalPrice());
+        if(bill != null) {
+            ord.setBill(bill);
+            ord.setStatus("pending"); // pending
 
-        cart.clear();
-        DM.setCustomer((Customer)Authentication.LoggedInUser);
+            ord.setOrderDate(LocalDateTime.now());
+            DM.setOrder(ord);
 
-        System.out.println("Order placed Successfully!");
+            cart.clear();
+            DM.setCustomer((Customer) Authentication.LoggedInUser);
+
+            System.out.println("Order placed Successfully!");
+        }else{
+            System.out.println("Order canceled!");
+        }
     }
 
 }

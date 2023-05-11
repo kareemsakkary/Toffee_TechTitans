@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="edit payment again">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_05_2023_12_40_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_05_2023_12_40_pm__Changes_.xml" beforeDir="false" />
+    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="done view orders and edit status">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OrderManagement/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Toffee_TechTitans.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Toffee_TechTitans.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Authentication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/ShoppingCart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,19 +36,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/karee/IdeaProjects/Toffee_TechTitans/lib/json-simple-1.1.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/karee/Downloads/javax.mail.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\karee\IdeaProjects\Toffee_TechTitans\lib" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Manager" />
     </key>
@@ -160,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683654851066</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="done view orders and edit status">
+      <created>1683845837302</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683845837302</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -174,7 +179,8 @@
     <MESSAGE value="change quantity in JSON" />
     <MESSAGE value="edit payment" />
     <MESSAGE value="edit payment again" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit payment again" />
+    <MESSAGE value="done view orders and edit status" />
+    <option name="LAST_COMMIT_MESSAGE" value="done view orders and edit status" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
