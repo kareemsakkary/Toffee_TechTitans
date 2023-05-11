@@ -62,7 +62,6 @@ public class ShoppingCart {
             System.out.println();
         }
         System.out.println("Total price: " + totalPrice);
-        System.out.println();
     }
     public void clear(){
         cartItems.clear();

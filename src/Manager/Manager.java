@@ -193,7 +193,9 @@ public class Manager {
         System.out.println("----------------------");
 
     }
-
+    public void viewOrdersScreen(){
+        ordManager.viewAllOrders();
+    }
     public void run() {
 //        DM.setVoucher(new Voucher("-50" , 50));
 //        DM.setVoucher(new Voucher("-40" , 40));
@@ -237,7 +239,7 @@ public class Manager {
                 } else if (choice == 2) {
                     viewItemsScreen();
                 } else if (choice == 3) {
-//                    viewOrdersScreen();
+                    viewOrdersScreen();
                 }
                 else if (choice == 4) {
                     auth.logout();

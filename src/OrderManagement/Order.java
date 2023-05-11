@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 public class Order {
     private String orderID;
     private ShoppingCart cart;
-    private boolean status;
+    private String status;
     private Payment bill;
     private String shippingAddress;
     private LocalDateTime orderDate;
@@ -17,7 +17,7 @@ public class Order {
         this.cart = cart;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -42,7 +42,7 @@ public class Order {
         return cart;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 

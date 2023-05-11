@@ -7,10 +7,7 @@ import Authentication.Authentication;
 import Manager.DataManager;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class OrderManagement { // m7tag el user ytzbt el awl
     private DataManager DM;
@@ -18,6 +15,47 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         DM = new DataManager();
     };
     public void viewAllOrders() {
+        System.out.println("Orders :");
+        int i = 0 ;
+        Vector<Order> orders = DM.getOrders();
+        for (Order order : orders) {
+            System.out.println("Order #" + i);
+            System.out.println("User name :" + order.getCart().getCustomer().getName());
+            System.out.println("Items :");
+            order.getCart().viewCart();
+            System.out.println("Price after vouchers : " + order.getBill().getNetPrice());
+            System.out.println("Status : " + order.getStatus());
+            System.out.println("=====================================");
+            i++;
+        }
+        String txtBlock = """ 
+                        Please choose one of the following options:
+                        1. Check order delivered
+                        2. Return Back
+                        >>""";
+        Scanner input = new Scanner(System.in);
+        loop:
+        while (true) {
+            System.out.print(txtBlock);
+            int option = input.nextInt();
+            switch (option){
+                case 1:
+                    System.out.print("Enter order number : ");
+                    int num = input.nextInt();
+                    if(num<i){
+                        orders.get(num).setStatus("delivered");
+                        DM.setOrder(orders.get(num));
+                        System.out.println("Order status changed successfully!!");
+                    }else{
+                        System.out.println("No order with this number");
+                    }
+                    break ;
+                case 2:
+                    break loop;
+                default:
+                    System.out.println("Wrong option");
+            }
+        }
     }
 
 
@@ -144,9 +182,7 @@ public class OrderManagement { // m7tag el user ytzbt el awl
 
         Payment bill = choosePayment(cart.getTotalPrice());
         ord.setBill(bill);
-
-        ord.setStatus(false); // pending
-
+        ord.setStatus("pending"); // pending
         System.out.print("Choose shipping address: ");
         String address = input.nextLine();
         ord.setShippingAddress(address);

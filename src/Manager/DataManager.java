@@ -16,10 +16,8 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Vector;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class DataManager {
     private JSONObject data;
@@ -70,7 +68,7 @@ public class DataManager {
         orderJson.put("id",order.getOrderID());
         orderJson.put("userId",order.getCart().getCustomer().getAccountID());
         orderJson.put("cart",toJsonObj(order.getCart()));
-        orderJson.put("statues",order.isStatus());
+        orderJson.put("status",order.getStatus());
         orderJson.put("bill",toJsonObj(order.getBill()));
         orderJson.put("date",order.getOrderDate().toString());
         orderJson.put("address",order.getShippingAddress());
@@ -109,6 +107,13 @@ public class DataManager {
             cart.addItem(getItem(entry.toString()) , Integer.parseInt((String)CartJson.get(entry.toString())));
         }
         return cart;
+    }
+    private ArrayList<Voucher> getVouchers(JSONObject vouchers){
+        ArrayList<Voucher> vouchs = new ArrayList<>();
+        for(Object entry: vouchers.keySet()){
+            vouchs.add(new Voucher(entry.toString(), (Double)vouchers.get(entry.toString())));
+        }
+        return vouchs;
     }
     public Customer getCustomer(String id){
         if(data.get("users") == null){
@@ -188,19 +193,24 @@ public class DataManager {
                 Double.parseDouble(voucher.get("value").toString())
                 );
     }
-    public Order getOrder(String id){
-        if(data.get("Order") == null){
-            System.out.print("No Orders found");
-//            return new Item();
-        }
-        JSONObject order =(JSONObject)((JSONObject)(data.get("items"))).get(id);
+    public Order getOrder(JSONObject order){
         if(order == null){
             return null;
         }
         Order nwOrder = new Order();
+        nwOrder.setOrderID(order.get("id").toString());
+        nwOrder.setOrderDate(LocalDateTime.parse(order.get("date").toString()));
+        ShoppingCart shoppingCart = getCart((JSONObject)order.get("cart"));
+        shoppingCart.setCustomer(getCustomer(order.get("userId").toString()));
+        nwOrder.setStatus(order.get("status").toString());
+        nwOrder.setCart(shoppingCart);
+        Payment payment = new Payment();
+        payment.setTotalPrice(shoppingCart.getTotalPrice());
 
-        return new Order();
-
+        for(Voucher voucher : getVouchers((JSONObject)((JSONObject) order.get("bill")).get("vouchers")))
+            payment.addVoucher(voucher);
+        nwOrder.setBill(payment);
+        return nwOrder;
     }
     // Set Data
     public void setCustomer(Customer customer){
@@ -311,6 +321,17 @@ public class DataManager {
         }
         return getCatalog;
     }
+    public Vector<Order> getOrders(){
+        Vector<Order> orders = new Vector<>();
+        JSONObject ordersJson = (JSONObject) data.get("orders");
+        if(ordersJson!=null){
+            for(Object order : ordersJson.values()){
+                orders.add(getOrder((JSONObject) order));
+            }
+        }
+        return orders;
+    }
+
     public void print(){
         System.out.print(data.toString());
     }
