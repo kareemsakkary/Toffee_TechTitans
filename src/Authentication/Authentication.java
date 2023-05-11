@@ -158,7 +158,7 @@ public class Authentication {
     public void showAllUsers(){
         System.out.print("Users : ");
         for(Account account : DM.getAccounts()){
-            System.out.println("id : " + account.getAccountID());
+            System.out.println("ID : " + account.getAccountID());
             System.out.println("Name : " + account.getName());
             System.out.println("Email : " + account.getEmail());
             System.out.println("Phone : " + account.getPhone());
