@@ -235,7 +235,7 @@ public class Manager {
                 System.out.print(txtBlock);
                 int choice = scan.nextInt();
                 if (choice == 1) {
-//                viewUsersScreen();
+                    viewUsersScreen();
                 } else if (choice == 2) {
                     viewItemsScreen();
                 } else if (choice == 3) {
@@ -277,5 +277,7 @@ public class Manager {
         }
     }
 
-
+    private void viewUsersScreen() {
+        auth.showAllUsers();
+    }
 }

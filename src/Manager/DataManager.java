@@ -331,7 +331,19 @@ public class DataManager {
         }
         return orders;
     }
-
+    public Vector<Account> getAccounts(){
+        JSONObject users = (JSONObject) data.get("users");
+        Vector<Account> accounts = new Vector<>();
+        if(users!=null){
+            Account acc;
+            for(Object user : users.values()){
+                if((boolean)((JSONObject)user).get("isAdmin"))acc = getAdmin((JSONObject)user);
+                else acc = getCustomer((JSONObject)user);
+                accounts.add(acc);
+            }
+        }
+        return accounts;
+    }
     public void print(){
         System.out.print(data.toString());
     }
