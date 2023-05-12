@@ -168,6 +168,7 @@ public class Manager {
 
                         Item it = v.get(index - 1);
                         cart.removeItem(it, 50);
+                        System.out.println("Item removed successfully!\n");
                         cart.addItem(it, qnt);
                         DM.setCustomer((Customer)Authentication.LoggedInUser);
                     }
