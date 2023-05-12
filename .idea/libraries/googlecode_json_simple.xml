@@ -5,8 +5,6 @@
       <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
