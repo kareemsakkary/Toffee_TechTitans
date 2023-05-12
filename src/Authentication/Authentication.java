@@ -154,7 +154,6 @@ public class Authentication {
             }
         }
     }
-
     public void showAllUsers(){
         System.out.print("Users : ");
         for(Account account : DM.getAccounts()){

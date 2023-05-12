@@ -295,7 +295,6 @@ public class Manager {
                     System.exit(0);
                 } else {
                     System.out.print("Invalid choice!");
-                    System.exit(0);
                 }
             }
         }
