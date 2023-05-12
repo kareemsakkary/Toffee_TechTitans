@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="Done show all user">
+    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Authentication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manager/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OrderManagement/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/Payment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683847804101</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary=".">
+      <created>1683916519460</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683916519460</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -199,7 +208,8 @@
     <MESSAGE value="done view orders and edit status" />
     <MESSAGE value="Done otp in register place order" />
     <MESSAGE value="Done show all user" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done show all user" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -3,17 +3,17 @@ package OrderManagement;
 import Authentication.Account;
 
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.Vector;
 
 public class Payment {
 
     private String PaymentMethod;//m3rfsh 7war el enumerations lsa
     private double netPrice;
     private double totalPrice;
-    private ArrayList<Voucher> vouchers;// cart item wla asebha hena
+    private Vector<Voucher> vouchers;// cart item wla asebha hena
     private double loyaltyPoints;
     public Payment(){
-        vouchers = new ArrayList<Voucher>();
+        vouchers = new Vector<Voucher>();
     }
 
     public void useLoyalty() {
@@ -73,7 +73,7 @@ public class Payment {
         return netPrice;
     }
 
-    public ArrayList<Voucher> getVouchers() {
+    public Vector<Voucher> getVouchers() {
         return vouchers;
     }
 

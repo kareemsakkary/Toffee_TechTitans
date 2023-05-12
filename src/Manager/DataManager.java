@@ -80,7 +80,6 @@ public class DataManager {
         jVoucher.put("value",voucher.getValue());
         return jVoucher;
     }
-
     private void loadData(){
         JSONParser parser = new JSONParser();
         try {
@@ -108,8 +107,8 @@ public class DataManager {
         }
         return cart;
     }
-    private ArrayList<Voucher> getVouchers(JSONObject vouchers){
-        ArrayList<Voucher> vouchs = new ArrayList<>();
+    private Vector<Voucher> getVouchers(JSONObject vouchers){
+        Vector<Voucher> vouchs = new Vector<>();
         for(Object entry: vouchers.keySet()){
             vouchs.add(new Voucher(entry.toString(), (Double)vouchers.get(entry.toString())));
         }
