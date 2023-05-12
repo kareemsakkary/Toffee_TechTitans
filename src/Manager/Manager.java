@@ -14,6 +14,11 @@ public class Manager {
     private StockManagement stckManager;
     private Authentication auth;
     private DataManager DM;
+
+    /**
+     * Managers Constructor
+     * Creates new objects of the other managers inside itself
+     */
     public Manager() {
         this.ordManager = new OrderManagement();
         this.stckManager = new StockManagement();
@@ -21,6 +26,10 @@ public class Manager {
         this.DM = new DataManager();
     }
 
+    /**
+     * Shows the catalog and the option to add item to cart
+     * or logout or return to the previous menu
+     */
     public void viewItemsScreen() {
         while (true) {
             stckManager.viewCatalog();
@@ -33,9 +42,9 @@ public class Manager {
                         3. Return back
                         """;
                 System.out.print(txtBlock);
-                int choice = scan.nextInt();
+                String choice = scan.nextLine();
                 switch (choice) {
-                    case 1:
+                    case "1":
                         ShoppingCart cart = ((Customer) LoggedInUser).getCart();
                         System.out.print("Please enter the item number: ");
                         int itemNum = scan.nextInt();
@@ -52,10 +61,10 @@ public class Manager {
                         if(!found)
                             System.out.println("Invalid item number, doesn't exist!");
                         break;
-                    case 2:
+                    case "2":
                         auth.logout();
                         return;
-                    case 3:
+                    case "3":
                         return;
                     default:
                         System.out.print("Invalid choice!");
@@ -72,20 +81,20 @@ public class Manager {
                         4. Return back
                         """;
                 System.out.print(txtBlock);
-                int choice = scan.nextInt();
+                String choice = scan.nextLine();
                 switch (choice) {
-                    case 1:
+                    case "1":
                         // added when admin functions is implemented
                         // add item to catalog
                         break;
-                    case 2:
+                    case "2":
                         // added when admin functions is implemented
                         // remove item from catalog
                         break;
-                    case 3:
+                    case "3":
                         auth.logout();
                         return;
-                    case 4:
+                    case "4":
                        return;
                     default:
                         System.out.print("Invalid choice!");
@@ -102,17 +111,17 @@ public class Manager {
                         4. Exit
                         """;
                 System.out.print(txtBlock);
-                int choice = scan.nextInt();
+                String choice = scan.nextLine();
                 switch (choice) {
-                    case 1:
+                    case "1":
                         auth.register();
                         break;
-                    case 2:
+                    case "2":
                         auth.login();
                         break;
-                    case 3:
+                    case "3":
                         return;
-                    case 4:
+                    case "4":
                         System.out.print("Thank you for using our application!");
                         System.exit(0);
                     default:
@@ -125,6 +134,11 @@ public class Manager {
 
     }
 
+    /**
+     * Display the content of the cart and the total price
+     * and options to change quantity, remove item, placing order
+     * or to go back to the previous menu
+     */
     public void viewCartScreen() {
         Scanner choice = new Scanner(System.in);
         Scanner input = new Scanner(System.in); // m3rfsh eh el bug bs da m5sos lel int
@@ -193,9 +207,18 @@ public class Manager {
         System.out.println("----------------------");
 
     }
+
+    /**
+     * displays all the orders made
+     */
     public void viewOrdersScreen(){
         ordManager.viewAllOrders();
     }
+
+    /**
+     * Responsible for organizing all the menus for the logged-in users,
+     * general users and admins
+     */
     public void run() {
 //        DM.setVoucher(new Voucher("-50" , 50));
 //        DM.setVoucher(new Voucher("-40" , 40));
@@ -277,6 +300,9 @@ public class Manager {
         }
     }
 
+    /**
+     * Displays all the Accounts created
+     */
     private void viewUsersScreen() {
         auth.showAllUsers();
     }
