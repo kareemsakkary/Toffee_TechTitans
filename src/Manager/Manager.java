@@ -9,6 +9,10 @@ import java.util.Vector;
 
 import static Authentication.Authentication.LoggedInUser;
 
+/**
+ * Using this class, you can control how the system
+ * functions and get the options that the user wants.
+ */
 public class Manager {
     private OrderManagement ordManager;
     private StockManagement stckManager;
@@ -16,7 +20,7 @@ public class Manager {
     private DataManager DM;
 
     /**
-     * Managers Constructor
+     * Empty Manager constructor.
      * Creates new objects of the other managers inside itself
      */
     public Manager() {
@@ -50,15 +54,15 @@ public class Manager {
                         int itemNum = scan.nextInt();
                         boolean found = false;
                         for (int i = 0; i < stckManager.getCategories().size(); i++) {
-                            if(itemNum - 1 == i){
+                            if (itemNum - 1 == i) {
                                 Item target = stckManager.getCategories().get(i);
-                                cart.addItem(target ,1);
+                                cart.addItem(target, 1);
                                 DM.setCustomer(((Customer) LoggedInUser));
                                 found = true;
                                 System.out.println("Item added successfully!\n");
                             }
                         }
-                        if(!found)
+                        if (!found)
                             System.out.println("Invalid item number, doesn't exist!");
                         break;
                     case "2":
@@ -70,8 +74,7 @@ public class Manager {
                         System.out.print("Invalid choice!");
                         System.exit(0);
                 }
-            }
-            else if (LoggedInUser instanceof Admin) {
+            } else if (LoggedInUser instanceof Admin) {
                 Scanner scan = new Scanner(System.in);
                 String txtBlock = """ 
                         Please choose one of the following options:
@@ -95,13 +98,12 @@ public class Manager {
                         auth.logout();
                         return;
                     case "4":
-                       return;
+                        return;
                     default:
                         System.out.print("Invalid choice!");
                         System.exit(0);
                 }
-            }
-            else {
+            } else {
                 Scanner scan = new Scanner(System.in);
                 String txtBlock = """ 
                         Please choose one of the following options:
@@ -143,7 +145,7 @@ public class Manager {
         Scanner choice = new Scanner(System.in);
         Scanner input = new Scanner(System.in); // m3rfsh eh el bug bs da m5sos lel int
 //        ha5od cart el logged in
-        ShoppingCart cart = ((Customer)Authentication.LoggedInUser).getCart(); // dummy cart
+        ShoppingCart cart = ((Customer) Authentication.LoggedInUser).getCart(); // dummy cart
         System.out.println("----- YOUR CART ------");
         cart.viewCart();
         System.out.println("1- Change quantity");
@@ -170,7 +172,7 @@ public class Manager {
                         cart.removeItem(it, 50);
                         System.out.println("Item removed successfully!\n");
                         cart.addItem(it, qnt);
-                        DM.setCustomer((Customer)Authentication.LoggedInUser);
+                        DM.setCustomer((Customer) Authentication.LoggedInUser);
                     }
                     break;
                 case "2":
@@ -181,8 +183,8 @@ public class Manager {
                         System.out.print("Choose the item you wish to remove(1->" + v.size() + "): ");
                         int index = input.nextInt();
                         Item it = v.get(index - 1);
-                        cart.removeItem(it,50);
-                        DM.setCustomer((Customer)Authentication.LoggedInUser);
+                        cart.removeItem(it, 50);
+                        DM.setCustomer((Customer) Authentication.LoggedInUser);
                     }
                     break;
                 case "3":
@@ -212,7 +214,7 @@ public class Manager {
     /**
      * displays all the orders made
      */
-    public void viewOrdersScreen(){
+    public void viewOrdersScreen() {
         ordManager.viewAllOrders();
     }
 
@@ -264,11 +266,9 @@ public class Manager {
                     viewItemsScreen();
                 } else if (choice == 3) {
                     viewOrdersScreen();
-                }
-                else if (choice == 4) {
+                } else if (choice == 4) {
                     auth.logout();
-                }
-                else {
+                } else {
                     System.out.print("Invalid choice!");
                     System.exit(0);
                 }
@@ -289,8 +289,7 @@ public class Manager {
                     auth.login();
                 } else if (choice == 3) {
                     viewItemsScreen();
-                }
-                else if (choice == 4) {
+                } else if (choice == 4) {
                     System.out.print("Thank you for using our application!");
                     System.exit(0);
                 } else {
