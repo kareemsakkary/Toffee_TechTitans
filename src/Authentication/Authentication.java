@@ -3,6 +3,7 @@ package Authentication;
 import Manager.DataManager;
 import Manager.Manager;
 import OrderManagement.ShoppingCart;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -11,78 +12,100 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * The purpose of this class is to authenticate the user when they use any method
+ * in the system to ensure that they have the authority to perform that action.
+ */
 public class Authentication {
     public static Account LoggedInUser;
     DataManager DM;
-    public Authentication(){
+
+    /**
+     * Empty Authentication constructor.
+     */
+    public Authentication() {
         DM = new DataManager();
     }
-    void setLoggedInUser(Account acc){
+
+    /**
+     * LoggedInUser setter.
+     *
+     * @param acc sets the LoggedInUser to this user.
+     */
+    void setLoggedInUser(Account acc) {
         LoggedInUser = acc;
     }
-    public void login(){
+
+    /**
+     * Handles the login and authenticating the user.
+     */
+    public void login() {
         Scanner scan = new Scanner(System.in);
         Account acc = null;
-        System.out.println("Login page enter your info to login or\n write \"back\" to return to main menu");
+        System.out.println("Login page enter your info to login or\nwrite \"back\" to return to main menu");
         while (acc == null) {
-            System.out.print("Enter your email : ");
+            System.out.print("Enter your email: ");
             String email = scan.nextLine();
-            if(email.equals("back")){
+            if (email.equals("back")) {
                 break;
             }
-            System.out.print("Enter your password : ");
+            System.out.print("Enter your password: ");
             String pass = scan.nextLine();
-            if(pass.equals("back")){
+            if (pass.equals("back")) {
                 break;
             }
             acc = DM.checkAuth(email, pass);
             if (acc == null) {
-                System.out.println("email and password didn`t match !!");
-            }else{
-                System.out.println("logged in successfully");
+                System.out.println("Email and password didn't match!");
+            } else {
+                System.out.println("Logged in successfully!");
                 setLoggedInUser(acc);
                 break;
             }
         }
     }
-    public void register(){
+
+    /**
+     * handles the register and authenticating the user using otp.
+     */
+    public void register() {
         Scanner scan = new Scanner(System.in);
         Account acc = null;
-        System.out.println("Register page enter your Register to login or\n write \"back\" to return to main menu");
-       System.out.print("Enter your name : ");
+        System.out.println("Register page enter your Register to login or\nwrite \"back\" to return to main menu");
+        System.out.print("Enter your name: ");
         String name = scan.nextLine();
-        if(name.equals("back")){
+        if (name.equals("back")) {
             return;
         }
         String email = null;
         while (true) {
-            System.out.print("Enter your email : ");
+            System.out.print("Enter your email: ");
             email = scan.nextLine();
-            if(DM.emailExist(email)){
+            if (DM.emailExist(email)) {
                 System.out.print("Email already exist");
-            }else{
+            } else {
                 break;
             }
         }
-        if(email.equals("back")){
+        if (email.equals("back")) {
             return;
         }
-        System.out.print("Enter your password : ");
+        System.out.print("Enter your password: ");
         String pass = scan.nextLine();
-        if(pass.equals("back")){
+        if (pass.equals("back")) {
             return;
         }
-        System.out.print("Enter your phone : ");
+        System.out.print("Enter your phone: ");
         String phone = scan.nextLine();
-        if(phone.equals("back")){
+        if (phone.equals("back")) {
             return;
         }
-        System.out.print("Enter your address : ");
+        System.out.print("Enter your address: ");
         String address = scan.nextLine();
-        if(address.equals("back")){
+        if (address.equals("back")) {
             return;
         }
-        String id = Integer.toString(DM.accountSize()+1);
+        String id = Integer.toString(DM.accountSize() + 1);
         Customer customer = new Customer(
                 id,
                 name,
@@ -93,18 +116,30 @@ public class Authentication {
                 new ShoppingCart(),
                 address
         );
-        if(checkOTP(customer)){
+        if (checkOTP(customer)) {
             DM.setCustomer(customer);
             System.out.println("Registered successfully!");
-        }else{
+        } else {
             System.out.println("Registration canceled!");
         }
     }
-    public void logout(){
+
+    /**
+     * Signs-out the LoggedInUser.
+     */
+    public void logout() {
         LoggedInUser = null;
         System.out.println("Logged out successfully!");
     }
-    public static boolean SendOTP(String email , int code){
+
+    /**
+     * Sends the OTP to the email.
+     *
+     * @param email destination email.
+     * @param code  generated otp.
+     * @return boolean to identify if it was sent successfully or not.
+     */
+    public static boolean SendOTP(String email, int code) {
         String host = "smtp.gmail.com";
         String username = "techtitansknm@gmail.com";
         String password = "hwlisijqrmwrswmn";
@@ -127,41 +162,56 @@ public class Authentication {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 
             message.setSubject("TOFFE SHOP VERIFICATION CODE");
-            message.setText("Your OTP IS : " + code );
+            message.setText("Your OTP IS : " + code);
 
             Transport.send(message);
             System.out.println("Email sent successfully!");
             return true;
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
-    public static boolean  checkOTP(Customer customer){
+
+    /**
+     * Responsible for verifying the otp entered by the user.
+     *
+     * @param customer the user/.
+     * @return boolean to identify if the otp was correct.
+     */
+    public static boolean checkOTP(Customer customer) {
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
         int code = rand.nextInt(1000000);
-        SendOTP(customer.getEmail(),code);
+        if(!SendOTP(customer.getEmail(), code)){
+            System.out.println("Failed to send OTP to your email, try again!");
+            return false;
+        }
+
         while (true) {
             System.out.print("Enter OTP which sent to your Email or -1 to cancel: ");
             int ansCode = scan.nextInt();
-            if(ansCode==code) {
+            if (ansCode == code) {
 
                 return true;
-            }else if(ansCode==-1){
+            } else if (ansCode == -1) {
                 return false;
-            }else{
+            } else {
                 System.out.print("Wrong OTP try again, ");
             }
         }
     }
-    public void showAllUsers(){
+
+    /**
+     * Displays all the users stored in the database.
+     */
+    public void showAllUsers() {
         System.out.print("Users : ");
-        for(Account account : DM.getAccounts()){
+        for (Account account : DM.getAccounts()) {
             System.out.println("ID : " + account.getAccountID());
             System.out.println("Name : " + account.getName());
             System.out.println("Email : " + account.getEmail());
             System.out.println("Phone : " + account.getPhone());
-            if(account.isAdmin())
+            if (account.isAdmin())
                 System.out.println("Type : admin");
             else
                 System.out.println("Type : customer");

@@ -9,14 +9,26 @@ import Manager.DataManager;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class OrderManagement { // m7tag el user ytzbt el awl
+/**
+ * This class Manages the ordering processes in the system as well as mapping orders
+ * to a particular customer and storing them is the responsibility of this class.
+ */
+public class OrderManagement {
     private DataManager DM;
-    public OrderManagement(){
+
+    /**
+     * Empty OrderManagement constructor.
+     */
+    public OrderManagement() {
         DM = new DataManager();
-    };
+    }
+
+    /**
+     * Displays each order made and its details
+     */
     public void viewAllOrders() {
         System.out.println("Orders :");
-        int i = 0 ;
+        int i = 0;
         Vector<Order> orders = DM.getOrders();
         for (Order order : orders) {
             System.out.println("Order #" + i);
@@ -29,27 +41,27 @@ public class OrderManagement { // m7tag el user ytzbt el awl
             i++;
         }
         String txtBlock = """ 
-                        Please choose one of the following options:
-                        1. Check order delivered
-                        2. Return Back
-                        >>""";
+                Please choose one of the following options:
+                1. Check order delivered
+                2. Return Back
+                >>""";
         Scanner input = new Scanner(System.in);
         loop:
         while (true) {
             System.out.print(txtBlock);
             int option = input.nextInt();
-            switch (option){
+            switch (option) {
                 case 1:
                     System.out.print("Enter order number : ");
                     int num = input.nextInt();
-                    if(num<i){
+                    if (num < i) {
                         orders.get(num).setStatus("delivered");
                         DM.setOrder(orders.get(num));
                         System.out.println("Order status changed successfully!!");
-                    }else{
+                    } else {
                         System.out.println("No order with this number");
                     }
-                    break ;
+                    break;
                 case 2:
                     break loop;
                 default:
@@ -58,30 +70,12 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         }
     }
 
-
-    public void setStatus() {
-    }
-
-
-    public void viewOrder() {
-    }
-
-
-    public void cancelOrder() {
-    }
-
-    public void reorder() {
-    }
-
-
-    public void changeStatus() {
-    }
-
-
-    public void printStatistics() {
-    }
-
-
+    /**
+     * Takes Voucher code as input and adds it to the Payment
+     *
+     * @param payment the Payment to add the voucher inside.
+     * @return The leftover value from the used voucher as a new voucher
+     */
     public Voucher addVoucher(Payment payment) {
         Voucher temp = null;
         Scanner input = new Scanner(System.in);
@@ -100,8 +94,16 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         return temp;
     }
 
-    public boolean checkout(Payment payment,Voucher temp){
-        if(Authentication.checkOTP((Customer) Authentication.LoggedInUser)) {
+    /**
+     * Confirms the order with otp then removes the vouchers from the database
+     * and adds the leftover voucher if it has any value remaining.
+     *
+     * @param payment The Payment to be confirmed.
+     * @param temp    The leftover Voucher from the addVoucher method.
+     * @return boolean to confirm the result of the checkout process.
+     */
+    public boolean checkout(Payment payment, Voucher temp) {
+        if (Authentication.checkOTP((Customer) Authentication.LoggedInUser)) {
             for (Voucher v : payment.getVouchers()) {
                 DM.removeVoucher(v);
             }
@@ -113,6 +115,14 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         }
         return false;
     }
+
+    /**
+     * Gives the customer the option to add voucher to the Payment
+     * or to pay with cash the remaining netPrice or to cancel the order.
+     *
+     * @param total value to be set as the totalPrice.
+     * @return returns the Payment object after adding Vouchers and calculating the new netPrice.
+     */
     public Payment choosePayment(double total) {
         Scanner input = new Scanner(System.in);
         Payment payment = new Payment();
@@ -121,9 +131,8 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         label:
         while (true) {
             String option;
-            System.out.println("Total price : " + payment.getTotalPrice() +" after voucher : " + payment.getNetPrice());
-            if(payment.getNetPrice() != 0) {
-//                System.out.println("Choose !");
+            System.out.println("Total price : " + payment.getTotalPrice() + " after voucher : " + payment.getNetPrice());
+            if (payment.getNetPrice() != 0) {
                 System.out.println("1- Add Voucher");
                 System.out.println("2- Checkout and pay with cash");
                 System.out.println("3- Cancel order");
@@ -134,36 +143,41 @@ public class OrderManagement { // m7tag el user ytzbt el awl
                         nwVoucher = addVoucher(payment);
                         break;
                     case "2":
-                        if(checkout(payment,nwVoucher)) {
+                        if (checkout(payment, nwVoucher)) {
                             return payment;
-                        }else{
+                        } else {
                             return null;
                         }
                     case "3":
                         break label;
+                    default:
+                        System.out.println("\nInvalid input, try again.\n");
                 }
-            }else{
+            } else {
                 System.out.println("1- Checkout");
                 System.out.println("2- Cancel order");
                 System.out.print(">>");
                 option = input.nextLine();
                 switch (option) {
                     case "1":
-                        checkout(payment,nwVoucher);
+                        checkout(payment, nwVoucher);
                         return payment;
                     case "2":
                         break label;
+                    default:
+                        System.out.println("\nInvalid input, try again.\n");
                 }
             }
-            System.out.println("\nInvalid input, try again.\n");
         }
-        System.out.println("Order Canceled.\n");
         payment = null;
         return payment;
     }
 
+    /**
+     * Initiates the process of placing order which contains confirmation, order cancellation,
+     * choosing the payment method and shipping address.
+     */
     public void placeOrder() {
-//        Account loggedInUser = Authentication.LoggedInUser;
         Scanner input = new Scanner(System.in);
         String option = "3";
         while (!option.equals("1") && !option.equals("2")) {
@@ -182,7 +196,7 @@ public class OrderManagement { // m7tag el user ytzbt el awl
 
 
         Order ord = new Order();
-        ord.setOrderID(Integer.toString(DM.orderSize()+1));
+        ord.setOrderID(Integer.toString(DM.orderSize() + 1));
 
         ShoppingCart cart = ((Customer) Authentication.LoggedInUser).getCart();
         ord.setCart(cart);
@@ -192,9 +206,9 @@ public class OrderManagement { // m7tag el user ytzbt el awl
         ord.setShippingAddress(address);
 
         Payment bill = choosePayment(cart.getTotalPrice());
-        if(bill != null) {
+        if (bill != null) {
             ord.setBill(bill);
-            ord.setStatus("pending"); // pending
+            ord.setStatus("pending");
 
             ord.setOrderDate(LocalDateTime.now());
             DM.setOrder(ord);
@@ -203,7 +217,7 @@ public class OrderManagement { // m7tag el user ytzbt el awl
             DM.setCustomer((Customer) Authentication.LoggedInUser);
 
             System.out.println("Order placed Successfully!");
-        }else{
+        } else {
             System.out.println("Order canceled!");
         }
     }
