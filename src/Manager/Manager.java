@@ -64,7 +64,7 @@ public class Manager {
                             }
                         }
                         if (!found)
-                            System.out.println("Invalid item number, doesn't exist!");
+                            System.out.println("Invalid item number, item doesn't exist!");
                         break;
                     case "2":
                         auth.logout();
@@ -161,13 +161,18 @@ public class Manager {
                         Vector<Item> v = cart.getItems();
                         System.out.print("Choose the item (1->" + v.size() + "): ");
                         int index = input.nextInt();
+                        if(index > v.size() || index <= 0){
+                            System.out.println("Invalid item number!");
+                            break;
+                        }
                         System.out.print("Change quantity to: ");
                         int qnt = input.nextInt();
                         Item it = v.get(index - 1);
                         cart.removeItem(it, 50);
-                        System.out.println("Item removed successfully!\n");
                         if(qnt > 0)
                             cart.addItem(it, qnt);
+                        else
+                            System.out.println("Item removed successfully!\n");
                         DM.setCustomer((Customer) Authentication.LoggedInUser);
                     }
                     break;
@@ -178,8 +183,13 @@ public class Manager {
                         Vector<Item> v = cart.getItems();
                         System.out.print("Choose the item you wish to remove(1->" + v.size() + "): ");
                         int index = input.nextInt();
+                        if(index > v.size() || index <= 0){
+                            System.out.println("Invalid item number!");
+                            break;
+                        }
                         Item it = v.get(index - 1);
                         cart.removeItem(it, 50);
+                        System.out.println("Item removed successfully!\n");
                         DM.setCustomer((Customer) Authentication.LoggedInUser);
                     }
                     break;
@@ -195,6 +205,7 @@ public class Manager {
                     System.out.println(option + "\n Invalid input, try again.\n");
                     break;
             }
+            System.out.println("----- YOUR CART ------");
             cart.viewCart();
             System.out.println("1- Change quantity");
             System.out.println("2- Remove Item");

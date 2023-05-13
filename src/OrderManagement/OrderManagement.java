@@ -70,30 +70,6 @@ public class OrderManagement {
         }
     }
 
-
-    public void setStatus() {
-    }
-
-
-    public void viewOrder() {
-    }
-
-
-    public void cancelOrder() {
-    }
-
-    public void reorder() {
-    }
-
-
-    public void changeStatus() {
-    }
-
-
-    public void printStatistics() {
-    }
-
-
     /**
      * Takes Voucher code as input and adds it to the Payment
      *
@@ -157,7 +133,6 @@ public class OrderManagement {
             String option;
             System.out.println("Total price : " + payment.getTotalPrice() + " after voucher : " + payment.getNetPrice());
             if (payment.getNetPrice() != 0) {
-//                System.out.println("Choose !");
                 System.out.println("1- Add Voucher");
                 System.out.println("2- Checkout and pay with cash");
                 System.out.println("3- Cancel order");
@@ -203,7 +178,6 @@ public class OrderManagement {
      * choosing the payment method and shipping address.
      */
     public void placeOrder() {
-//        Account loggedInUser = Authentication.LoggedInUser;
         Scanner input = new Scanner(System.in);
         String option = "3";
         while (!option.equals("1") && !option.equals("2")) {
@@ -234,7 +208,7 @@ public class OrderManagement {
         Payment bill = choosePayment(cart.getTotalPrice());
         if (bill != null) {
             ord.setBill(bill);
-            ord.setStatus("pending"); // pending
+            ord.setStatus("pending");
 
             ord.setOrderDate(LocalDateTime.now());
             DM.setOrder(ord);
