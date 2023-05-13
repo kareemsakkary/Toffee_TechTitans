@@ -181,7 +181,7 @@ public class DataManager {
     private Vector<Voucher> getVouchers(JSONObject vouchers) {
         Vector<Voucher> vouchs = new Vector<>();
         for (Object entry : vouchers.keySet()) {
-            vouchs.add(new Voucher(entry.toString(), (Double) vouchers.get(entry.toString())));
+            vouchs.add(new Voucher(entry.toString(), (Float) vouchers.get(entry.toString())));
         }
         return vouchs;
     }
@@ -305,7 +305,7 @@ public class DataManager {
         }
         return new Voucher(
                 (String) voucher.get("code"),
-                Double.parseDouble(voucher.get("value").toString())
+                Float.parseFloat(voucher.get("value").toString())
         );
     }
 

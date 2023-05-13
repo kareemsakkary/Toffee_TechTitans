@@ -12,10 +12,10 @@ import java.util.Vector;
 public class Payment {
 
     private String PaymentMethod;
-    private double netPrice;
-    private double totalPrice;
+    private float netPrice;
+    private float totalPrice;
     private Vector<Voucher> vouchers;
-    private double loyaltyPoints;
+    private float loyaltyPoints;
 
     /**
      * Empty Payment constructor.
@@ -55,7 +55,7 @@ public class Payment {
      * Calculates the new price after adding a voucher.
      */
     public void setNetPrice() {
-        double voucher = 0;
+        float voucher = 0;
         //calculate sum of vouchers
         for (Voucher v : vouchers) {
             voucher += v.value;
@@ -86,7 +86,7 @@ public class Payment {
      *
      * @return The totalPrice of the order.
      */
-    public double getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
@@ -96,7 +96,7 @@ public class Payment {
      *
      * @param totalPrice The calculated total price.
      */
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
         setNetPrice();
     }
@@ -106,7 +106,7 @@ public class Payment {
      *
      * @return The netPrice of the order
      */
-    public double getNetPrice() {
+    public float getNetPrice() {
         return netPrice;
     }
 

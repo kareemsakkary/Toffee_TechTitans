@@ -5,7 +5,7 @@ package OrderManagement;
  */
 public class Voucher {
     String code;
-    double value;
+    float value;
 
     /**
      * Voucher constructor.
@@ -13,7 +13,7 @@ public class Voucher {
      * @param code  Voucher's code.
      * @param value Voucher's value.
      */
-    public Voucher(String code, double value) {
+    public Voucher(String code, float value) {
         this.code = code;
         this.value = value;
     }
@@ -32,7 +32,7 @@ public class Voucher {
      *
      * @param value the value to be set.
      */
-    public void setValue(double value) {
+    public void setValue(float value) {
         this.value = value;
     }
 
@@ -48,9 +48,9 @@ public class Voucher {
     /**
      * Voucher value getter.
      *
-     * @return double the Voucher's value.
+     * @return float the Voucher's value.
      */
-    public double getValue() {
+    public float getValue() {
         return value;
     }
 }

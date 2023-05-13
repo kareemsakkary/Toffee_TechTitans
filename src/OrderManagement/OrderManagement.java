@@ -123,7 +123,7 @@ public class OrderManagement {
      * @param total value to be set as the totalPrice.
      * @return returns the Payment object after adding Vouchers and calculating the new netPrice.
      */
-    public Payment choosePayment(double total) {
+    public Payment choosePayment(float total) {
         Scanner input = new Scanner(System.in);
         Payment payment = new Payment();
         payment.setTotalPrice(total);
