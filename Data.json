@@ -1,1 +1,166 @@
-{"voucherSize":"5","accSize":"4","orderSize":"0","orders":{},"itemSize":"5","vouchers":{"-50":{"code":"-50","value":50.0},"-40":{"code":"-40","value":40.0},"-30":{"code":"-30","value":30.0},"-20":{"code":"-20","value":20.0},"-10":{"code":"-10","value":10.0}},"items":{"1":{"price":25.0,"name":"Kitkat chunky","timesOrdered":0,"id":"1","category":"Chocolates"},"2":{"price":30.0,"name":"Candy Haribo","timesOrdered":0,"id":"2","category":"Candies"},"3":{"price":20.0,"name":"Flutes","timesOrdered":1,"id":"3","category":"Chocolates"},"4":{"price":10.0,"name":"Cookies","timesOrdered":2,"id":"4","category":"Biscuits"},"5":{"price":14.99,"name":"Lollipop","timesOrdered":0,"id":"5","category":"Candies"}},"users":{"1":{"password":"ramly","address":"fcai","phone":"12345","name":"Mohammad El Ramly","id":"1","isAdmin":true,"email":"ramly@gmail.com","cart":{}},"2":{"password":"kareem","address":"helwan","phone":"12345","name":"Kareem","id":"2","isAdmin":false,"email":"kareemsakkary101@gmail.com","cart":{}},"3":{"password":"nada","address":"maadi","phone":"12345","name":"Nada","id":"3","isAdmin":false,"email":"naddaa26@gmail.com","cart":{"1":"1","4":"1"}},"4":{"password":"waleed","address":"maadi","phone":"12345","name":"Waleed","id":"4","isAdmin":false,"email":"mohamed.waleed1023@gmail.com","cart":{}}}}
+{
+  "voucherSize": "5",
+  "accSize": "5",
+  "orderSize": "3",
+  "orders": {
+    "1": {
+      "date": "2023-05-13T18:40:26.052457900",
+      "address": "maadi",
+      "bill": {
+        "paymentMethod": "cash",
+        "vouchers": {}
+      },
+      "id": "1",
+      "userId": "3",
+      "cart": {
+        "1": "1",
+        "4": "1"
+      },
+      "status": "pending"
+    },
+    "2": {
+      "date": "2023-05-13T18:51:44.853343700",
+      "address": null,
+      "bill": {
+        "paymentMethod": null,
+        "vouchers": {}
+      },
+      "id": "2",
+      "userId": "5",
+      "cart": {
+        "1": "1",
+        "3": "1"
+      },
+      "status": "delivered"
+    },
+    "3": {
+      "date": "2023-05-13T18:54:17.329323200",
+      "address": "maadi",
+      "bill": {
+        "paymentMethod": "cash",
+        "vouchers": {}
+      },
+      "id": "3",
+      "userId": "5",
+      "cart": {
+        "1": "1",
+        "2": "1"
+      },
+      "status": "pending"
+    }
+  },
+  "itemSize": "5",
+  "vouchers": {
+    "-50": {
+      "code": "-50",
+      "value": 50.0
+    },
+    "-40": {
+      "code": "-40",
+      "value": 40.0
+    },
+    "-30": {
+      "code": "-30",
+      "value": 30.0
+    },
+    "-20": {
+      "code": "-20",
+      "value": 20.0
+    },
+    "-10": {
+      "code": "-10",
+      "value": 10.0
+    }
+  },
+  "items": {
+    "1": {
+      "price": 25.0,
+      "name": "Kitkat chunky",
+      "timesOrdered": 0,
+      "id": "1",
+      "category": "Chocolates"
+    },
+    "2": {
+      "price": 30.0,
+      "name": "Candy Haribo",
+      "timesOrdered": 0,
+      "id": "2",
+      "category": "Candies"
+    },
+    "3": {
+      "price": 20.0,
+      "name": "Flutes",
+      "timesOrdered": 1,
+      "id": "3",
+      "category": "Chocolates"
+    },
+    "4": {
+      "price": 10.0,
+      "name": "Cookies",
+      "timesOrdered": 2,
+      "id": "4",
+      "category": "Biscuits"
+    },
+    "5": {
+      "price": 14.99,
+      "name": "Lollipop",
+      "timesOrdered": 0,
+      "id": "5",
+      "category": "Candies"
+    }
+  },
+  "users": {
+    "1": {
+      "password": "ramly",
+      "address": "fcai",
+      "phone": "12345",
+      "name": "Mohammad El Ramly",
+      "id": "1",
+      "isAdmin": true,
+      "email": "ramly@gmail.com",
+      "cart": {}
+    },
+    "2": {
+      "password": "kareem",
+      "address": "helwan",
+      "phone": "12345",
+      "name": "Kareem",
+      "id": "2",
+      "isAdmin": false,
+      "email": "kareemsakkary101@gmail.com",
+      "cart": {}
+    },
+    "3": {
+      "password": "nada",
+      "address": "maadi",
+      "phone": "12345",
+      "name": "Nada",
+      "id": "3",
+      "isAdmin": false,
+      "email": "naddaa26@gmail.com",
+      "cart": {
+        "5": "2"
+      }
+    },
+    "4": {
+      "password": "waleed",
+      "address": "maadi",
+      "phone": "12345",
+      "name": "Waleed",
+      "id": "4",
+      "isAdmin": false,
+      "email": "mohamed.waleed1023@gmail.com",
+      "cart": {}
+    },
+    "5": {
+      "password": "nada",
+      "address": "fci",
+      "phone": "12345",
+      "name": "Nada",
+      "id": "5",
+      "isAdmin": false,
+      "email": "nadamohamed24@outlook.com",
+      "cart": {}
+    }
+  }
+}

@@ -1,14 +1,12 @@
 package Authentication;
 
 import Manager.DataManager;
-import Manager.Manager;
 import OrderManagement.ShoppingCart;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -42,7 +40,12 @@ public class Authentication {
     public void login() {
         Scanner scan = new Scanner(System.in);
         Account acc = null;
-        System.out.println("Login page enter your info to login or\nwrite \"back\" to return to main menu");
+        String txtBlock = """ 
+                        You can do one of the following options:
+                        - Proceed with the login process
+                        - Write "back" to return to the main menu
+                        """;
+        System.out.print(txtBlock);
         while (acc == null) {
             System.out.print("Enter your email: ");
             String email = scan.nextLine();
@@ -71,7 +74,12 @@ public class Authentication {
     public void register() {
         Scanner scan = new Scanner(System.in);
         Account acc = null;
-        System.out.println("Register page enter your Register to login or\nwrite \"back\" to return to main menu");
+        String txtBlock = """ 
+                        You can do one of the following options:
+                        - Proceed with the register process
+                        - Write "back" to return to the main menu
+                        """;
+        System.out.print(txtBlock);
         System.out.print("Enter your name: ");
         String name = scan.nextLine();
         if (name.equals("back")) {
@@ -196,7 +204,7 @@ public class Authentication {
             } else if (ansCode == -1) {
                 return false;
             } else {
-                System.out.print("Wrong OTP try again, ");
+                System.out.print("Wrong OTP, try again!");
             }
         }
     }
@@ -205,17 +213,17 @@ public class Authentication {
      * Displays all the users stored in the database.
      */
     public void showAllUsers() {
-        System.out.print("Users : ");
+        System.out.println("----- ALL USERS ------");
         for (Account account : DM.getAccounts()) {
-            System.out.println("ID : " + account.getAccountID());
-            System.out.println("Name : " + account.getName());
-            System.out.println("Email : " + account.getEmail());
-            System.out.println("Phone : " + account.getPhone());
+            System.out.println("ID: " + account.getAccountID());
+            System.out.println("Name: " + account.getName());
+            System.out.println("Email: " + account.getEmail());
+            System.out.println("Phone: " + account.getPhone());
             if (account.isAdmin())
-                System.out.println("Type : admin");
+                System.out.println("Type: admin");
             else
-                System.out.println("Type : customer");
-            System.out.println("=============================");
+                System.out.println("Type: customer");
+            System.out.println("----------------------");
         }
     }
 }

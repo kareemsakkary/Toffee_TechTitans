@@ -53,10 +53,9 @@ public class StockManagement {
         for (int i = 0; i < categories.size(); i++) {
             System.out.print(cnt + ".");
             categories.get(i).viewItem();
-            System.out.println();
+            System.out.println("----------------------");
             cnt++;
         }
-        System.out.println("----------------------");
     }
 
 }

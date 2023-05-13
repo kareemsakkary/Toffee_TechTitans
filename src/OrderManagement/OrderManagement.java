@@ -27,17 +27,17 @@ public class OrderManagement {
      * Displays each order made and its details
      */
     public void viewAllOrders() {
-        System.out.println("Orders :");
+        System.out.println("----- ALL ORDERS ------");
         int i = 0;
         Vector<Order> orders = DM.getOrders();
         for (Order order : orders) {
             System.out.println("Order #" + i);
-            System.out.println("User name :" + order.getCart().getCustomer().getName());
-            System.out.println("Items :");
+            System.out.println("User name: " + order.getCart().getCustomer().getName());
+            System.out.println("------- ITEMS --------");
             order.getCart().viewCart();
-            System.out.println("Price after vouchers : " + order.getBill().getNetPrice());
-            System.out.println("Status : " + order.getStatus());
-            System.out.println("=====================================");
+            System.out.println("Price after vouchers: " + order.getBill().getNetPrice());
+            System.out.println("Status: " + order.getStatus());
+            System.out.println("----------------------");
             i++;
         }
         String txtBlock = """ 
@@ -52,20 +52,20 @@ public class OrderManagement {
             int option = input.nextInt();
             switch (option) {
                 case 1:
-                    System.out.print("Enter order number : ");
+                    System.out.print("Enter order number: ");
                     int num = input.nextInt();
                     if (num < i) {
                         orders.get(num).setStatus("delivered");
                         DM.setOrder(orders.get(num));
-                        System.out.println("Order status changed successfully!!");
+                        System.out.println("Order status changed successfully!");
                     } else {
-                        System.out.println("No order with this number");
+                        System.out.println("No order with this number!");
                     }
                     break;
                 case 2:
                     break loop;
                 default:
-                    System.out.println("Wrong option");
+                    System.out.println("Wrong option!");
             }
         }
     }
@@ -79,7 +79,7 @@ public class OrderManagement {
     public Voucher addVoucher(Payment payment) {
         Voucher temp = null;
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter Code of the voucher :");
+        System.out.println("Enter Code of the voucher:");
         String code = input.nextLine();
         Voucher voucher = DM.getVoucher(code);
         if (voucher != null && !payment.getVouchers().contains(voucher)) {
@@ -89,7 +89,7 @@ public class OrderManagement {
             }
             payment.addVoucher(voucher);
         } else {
-            System.out.println("Wrong Voucher");
+            System.out.println("Wrong Voucher!");
         }
         return temp;
     }
@@ -131,7 +131,7 @@ public class OrderManagement {
         label:
         while (true) {
             String option;
-            System.out.println("Total price : " + payment.getTotalPrice() + " after voucher : " + payment.getNetPrice());
+            System.out.println("Total price: " + payment.getTotalPrice() + " -->After using voucher/s: " + payment.getNetPrice());
             if (payment.getNetPrice() != 0) {
                 System.out.println("1- Add Voucher");
                 System.out.println("2- Checkout and pay with cash");
