@@ -230,6 +230,8 @@ public class Manager {
      * general users and admins
      */
     public void run() {
+        System.out.println("Welcome to Toffee store :)");
+        System.out.println("-------------------------------------------");
         while (true) {
             if (LoggedInUser instanceof Customer) {
                 Scanner scan = new Scanner(System.in);
