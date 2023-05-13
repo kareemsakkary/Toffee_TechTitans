@@ -10,7 +10,7 @@ import java.util.Vector;
  */
 public class StockManagement {
 
-    DataManager dataManager;
+    private DataManager dataManager;
     private Vector<Item> categories = new Vector<>();
 
     /**

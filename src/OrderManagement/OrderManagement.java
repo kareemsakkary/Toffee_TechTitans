@@ -175,6 +175,8 @@ public class OrderManagement {
                         }
                     case "3":
                         break label;
+                    default:
+                        System.out.println("\nInvalid input, try again.\n");
                 }
             } else {
                 System.out.println("1- Checkout");
@@ -187,11 +189,11 @@ public class OrderManagement {
                         return payment;
                     case "2":
                         break label;
+                    default:
+                        System.out.println("\nInvalid input, try again.\n");
                 }
             }
-            System.out.println("\nInvalid input, try again.\n");
         }
-        System.out.println("Order Canceled.\n");
         payment = null;
         return payment;
     }

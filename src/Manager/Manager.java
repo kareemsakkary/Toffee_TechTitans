@@ -46,6 +46,7 @@ public class Manager {
                         3. Return back
                         """;
                 System.out.print(txtBlock);
+                System.out.print(">>");
                 String choice = scan.nextLine();
                 switch (choice) {
                     case "1":
@@ -71,8 +72,8 @@ public class Manager {
                     case "3":
                         return;
                     default:
-                        System.out.print("Invalid choice!");
-                        System.exit(0);
+                        System.out.println("Invalid input, try again.\n");
+                        break;
                 }
             } else if (LoggedInUser instanceof Admin) {
                 Scanner scan = new Scanner(System.in);
@@ -84,15 +85,10 @@ public class Manager {
                         4. Return back
                         """;
                 System.out.print(txtBlock);
+                System.out.print(">>");
                 String choice = scan.nextLine();
                 switch (choice) {
-                    case "1":
-                        // added when admin functions is implemented
-                        // add item to catalog
-                        break;
-                    case "2":
-                        // added when admin functions is implemented
-                        // remove item from catalog
+                    case "1", "2":
                         break;
                     case "3":
                         auth.logout();
@@ -100,8 +96,8 @@ public class Manager {
                     case "4":
                         return;
                     default:
-                        System.out.print("Invalid choice!");
-                        System.exit(0);
+                        System.out.println("Invalid input, try again.\n");
+                        break;
                 }
             } else {
                 Scanner scan = new Scanner(System.in);
@@ -113,6 +109,7 @@ public class Manager {
                         4. Exit
                         """;
                 System.out.print(txtBlock);
+                System.out.print(">>");
                 String choice = scan.nextLine();
                 switch (choice) {
                     case "1":
@@ -127,8 +124,8 @@ public class Manager {
                         System.out.print("Thank you for using our application!");
                         System.exit(0);
                     default:
-                        System.out.print("Invalid choice!");
-                        System.exit(0);
+                        System.out.println("Invalid input, try again.\n");
+                        break;
                 }
 
             }
@@ -143,9 +140,8 @@ public class Manager {
      */
     public void viewCartScreen() {
         Scanner choice = new Scanner(System.in);
-        Scanner input = new Scanner(System.in); // m3rfsh eh el bug bs da m5sos lel int
-//        ha5od cart el logged in
-        ShoppingCart cart = ((Customer) Authentication.LoggedInUser).getCart(); // dummy cart
+        Scanner input = new Scanner(System.in);
+        ShoppingCart cart = ((Customer) Authentication.LoggedInUser).getCart();
         System.out.println("----- YOUR CART ------");
         cart.viewCart();
         System.out.println("1- Change quantity");
@@ -167,11 +163,11 @@ public class Manager {
                         int index = input.nextInt();
                         System.out.print("Change quantity to: ");
                         int qnt = input.nextInt();
-
                         Item it = v.get(index - 1);
                         cart.removeItem(it, 50);
                         System.out.println("Item removed successfully!\n");
-                        cart.addItem(it, qnt);
+                        if(qnt > 0)
+                            cart.addItem(it, qnt);
                         DM.setCustomer((Customer) Authentication.LoggedInUser);
                     }
                     break;
@@ -223,11 +219,6 @@ public class Manager {
      * general users and admins
      */
     public void run() {
-//        DM.setVoucher(new Voucher("-50" , 50));
-//        DM.setVoucher(new Voucher("-40" , 40));
-//        DM.setVoucher(new Voucher("-30" , 30));
-//        DM.setVoucher(new Voucher("-20" , 20));
-//        DM.setVoucher(new Voucher("-10" , 10));
         while (true) {
             if (LoggedInUser instanceof Customer) {
                 Scanner scan = new Scanner(System.in);
@@ -238,6 +229,7 @@ public class Manager {
                         3. Logout
                         """;
                 System.out.print(txtBlock);
+                System.out.print(">>");
                 int choice = scan.nextInt();
                 if (choice == 1) {
                     viewCartScreen();
@@ -246,8 +238,7 @@ public class Manager {
                 } else if (choice == 3) {
                     auth.logout();
                 } else {
-                    System.out.print("Invalid choice!");
-                    System.exit(0);
+                    System.out.println("Invalid input, try again.\n");
                 }
             } else if (LoggedInUser instanceof Admin) {
                 Scanner scan = new Scanner(System.in);
@@ -259,6 +250,7 @@ public class Manager {
                         4. Logout
                         """;
                 System.out.print(txtBlock);
+                System.out.print(">>");
                 int choice = scan.nextInt();
                 if (choice == 1) {
                     viewUsersScreen();
@@ -269,8 +261,7 @@ public class Manager {
                 } else if (choice == 4) {
                     auth.logout();
                 } else {
-                    System.out.print("Invalid choice!");
-                    System.exit(0);
+                    System.out.println("Invalid input, try again.\n");
                 }
             } else {
                 Scanner scan = new Scanner(System.in);
@@ -282,6 +273,7 @@ public class Manager {
                         4. Exit
                         """;
                 System.out.print(txtBlock);
+                System.out.print(">>");
                 int choice = scan.nextInt();
                 if (choice == 1) {
                     auth.register();
@@ -293,7 +285,7 @@ public class Manager {
                     System.out.print("Thank you for using our application!");
                     System.exit(0);
                 } else {
-                    System.out.print("Invalid choice!");
+                    System.out.println("Invalid input, try again.\n");
                 }
             }
         }
