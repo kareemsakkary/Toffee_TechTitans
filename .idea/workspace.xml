@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="edit index">
+    <list default="true" id="207e6437-854f-4a61-8858-d1d8b395775d" name="Changes" comment="edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Toffee_TechTitans.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Toffee_TechTitans.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/Authentication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderManagement/OrderManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StockManagement/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StockManagement/StockManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +195,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683992074672</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="edit">
+      <created>1684003865183</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1684003865183</updated>
+    </task>
+    <task id="LOCAL-00019" summary="edit">
+      <created>1684004463407</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1684004463407</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -221,7 +228,8 @@
     <MESSAGE value="Done show all user" />
     <MESSAGE value="Changed exception otp" />
     <MESSAGE value="edit index" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit index" />
+    <MESSAGE value="edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Toffee_TechTitans$Main.ic" NAME="Main Coverage Results" MODIFIED="1683122861790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
